@@ -156,9 +156,9 @@ export default {
                 });
         },
         downloadPost({ rootState }) {
-            if(!rootState.auth.isLogin){
-              router.push("/login");
-              return ;
+            if (!rootState.auth.isLogin) {
+                router.push("/login");
+                return;
             }
             // httpdownload().get('api/download-posts')
             // .then(response => {
@@ -195,7 +195,6 @@ export default {
                     fileLink.click();
                 })
                 .catch((error) => {
-                   
                     console.log(error);
                 });
         },

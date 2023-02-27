@@ -6,14 +6,12 @@ use App\Contracts\Dao\Post\PostDaoInterface;
 use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class PostDao implements PostDaoInterface
 {
     public function index()
     {
         // if the user is login or not
-        if (Auth::check()){
+        if (Auth::check()) {
             $user = Auth::user();
             // if the use is admin and return all posts
             if ($user->type == '0') {
@@ -23,7 +21,7 @@ class PostDao implements PostDaoInterface
                             ->orWhere('posts.description', 'like', '%' . request('search') . '%');
                     })->orderby('id', 'desc')->paginate(5, ['posts.id', 'posts.title', 'posts.description', 'posts.created_at', 'posts.status', 'users.name']);
                 // if the user is a normal user just returning a user's created posts
-                } else if ($user->type == '1') {
+            } else if ($user->type == '1') {
                 return Posts::join('users', 'posts.create_user_id', '=', 'users.id')
                     ->where('posts.create_user_id', $user->id)
                     ->when(request('search'), function ($query) {
@@ -31,14 +29,20 @@ class PostDao implements PostDaoInterface
                             ->orWhere('posts.description', 'like', '%' . request('search') . '%');
                     })->orderby('id', 'desc')->paginate(5, ['posts.id', 'posts.title', 'posts.description', 'posts.created_at', 'posts.status', 'users.name']);
             }
-        // if the user is not login / return a post that is active 
+            // if the user is not login / return a post that is active 
         } else {
-            return Posts::join('users', 'posts.create_user_id', '=', 'users.id')
-                ->where('posts.status', 1)
-                ->when(request('search'), function ($query) {
-                    $query->where('posts.title', 'like', '%' . request('search') . '%')
-                        ->orWhere('posts.description', 'like', '%' . request('search') . '%');
-                })->orderby('id', 'desc')->paginate(5, ['posts.id', 'posts.title', 'posts.description', 'posts.created_at', 'posts.status', 'users.name']);
+            return Posts::join('users', 'users.id', '=', 'posts.create_user_id')
+                ->where('status', 1)
+                ->where(function ($q) {
+                    $q->when(request('search'), function ($query) {
+                        $query->where('posts.title', 'like', '%' . request('search') . '%')
+                            ->orWhere('posts.description', 'like', '%' . request('search') . '%');
+                    });
+                })
+                ->paginate(
+                    5,
+                    ['posts.id', 'posts.title', 'posts.description', 'posts.created_at', 'posts.status', 'users.name']
+                );
         }
     }
     public function show(Posts $post)

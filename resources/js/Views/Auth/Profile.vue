@@ -47,7 +47,7 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-4">Date of birth</div>
-                  <div class="col-5">{{ $store.state.auth.loginUser.dob }}</div>
+                  <div class="col-5">{{changeDateFormat($store.state.auth.loginUser.dob)}}</div>
                 </div>
                 <div class="row mb-3">
                   <div class="col-4">address</div>
@@ -75,7 +75,15 @@
 </template>
 
 <script>
-export default {};
+import { changeDateFormat } from '../../services/ChangeDateFormat';
+
+export default {
+  methods:{
+    changeDateFormat(date){
+      return changeDateFormat(date);
+    }
+  }
+};
 </script>
 
 <style>

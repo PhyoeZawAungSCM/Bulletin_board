@@ -48,7 +48,7 @@
                 Created Date
             </div>
             <div class="col-9">
-                {{post.created_at}}
+                {{changeDateFormat(post.created_at)}}
             </div>
          </div>
          <div class="row mb-3">
@@ -64,7 +64,7 @@
                 Updated Date
             </div>
             <div class="col-9">
-                {{ post.updated_at }}
+                {{changeDateFormat(post.updated_at) }}
             </div>
          </div>
          <div class="row mb-3">
@@ -95,6 +95,7 @@
 <script>
 import {Modal} from 'bootstrap/dist/js/bootstrap.bundle';
 import { http } from '../../services/http_service';
+import { changeDateFormat } from '../../services/ChangeDateFormat';
 export default {
   props:{
     mode:String,
@@ -123,6 +124,9 @@ export default {
         console.log("delete");
         this.$store.dispatch('deletePost',this.post.id)
         this.hideModal();
+      },
+      changeDateFormat(date){
+        return changeDateFormat(date);
       }
    },
    mounted(){

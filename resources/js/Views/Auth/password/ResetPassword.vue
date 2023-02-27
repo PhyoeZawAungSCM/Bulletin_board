@@ -17,7 +17,8 @@
           style="width: 700px"
           v-if="!checking && !isValidToken"
         >
-          Invalid Token
+          The link inactive ,
+          <router-link to="/forgotten-password"> request new link ? </router-link>
         </div>
         <div
           class="card-body justify-content-center d-block m-auto"

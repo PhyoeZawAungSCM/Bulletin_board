@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.23.1",
+        "jsonwebtoken": "^9.0.0",
         "vee-validate": "^3.4.14",
         "vue-papa-parse": "^3.1.0",
         "vue-router": "^3.6.5",

@@ -26,7 +26,7 @@ export default {
         },
     },
     actions: {
-        registerUser({ state, commit ,rootState}) {
+        registerUser({ state, commit, rootState }) {
             let type = state.createdTempUser.type == "admin" ? 0 : 1;
             let formData = new FormData();
             formData.append("name", state.createdTempUser.name);
@@ -48,29 +48,39 @@ export default {
                 .then((response) => {
                     commit("ADD_USER", response.data.data);
                     rootState.noti.hasMessage = true;
-                    rootState.noti.message = "User create successfully"
-                    state.createdTempUser = {}
+                    rootState.noti.message = "User create successfully";
+                    state.createdTempUser = {};
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
-        getUsers({ state }, { name, email, startDate, endDate, page }) {
-            http()
-                .get(
-                    `api/users?name=${name}&email=${email}&startDate=${startDate}&endDate=${endDate}&page=${page}`
-                )
-                .then((response) => {
-                    state.lastPage = response.data.last_page;
-                    state.users = response.data.data;
-                });
+        getUsers(
+            { state, rootState },
+            { name, email, startDate, endDate, page }
+        ) {
+            if (startDate > endDate) {
+                rootState.noti.hasError = true;
+                rootState.noti.message = "end date must greater than start date";
+            } else {
+                http()
+                    .get(
+                        `api/users?name=${name}&email=${email}&startDate=${startDate}&endDate=${endDate}&page=${page}`
+                    )
+                    .then((response) => {
+                        state.lastPage = response.data.last_page;
+                        state.users = response.data.data;
+                    });
+            }
         },
 
-        deleteUser({ commit }, id) {
+        deleteUser({ commit, rootState }, id) {
             http()
                 .delete(`api/users/${id}`)
                 .then((response) => {
                     commit("REMOVE_USER", response.data.data);
+                    rootState.noti.hasMessage = true;
+                    rootState.noti.message = "User delete successfully";
                 });
         },
     },

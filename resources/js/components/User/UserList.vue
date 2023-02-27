@@ -4,6 +4,7 @@
       <h4 class="text-white ps-3">User list</h4>
     </div>
     <success-noti v-if="getHasMessage" :isActive="getHasMessage">{{getMessage}}</success-noti>
+     <error-noti v-if="getHasError" :isActive="getHasError">{{getMessage}}</error-noti>
     <div class="d-flex justify-content-end py-2 align-items-center ms-3">
       <label for="keyword" class="me-3 fw-semibold">Name:</label>
       <input
@@ -44,7 +45,7 @@
     <div class="mx-3">
       <div class="table-responsive">
         <table
-          class="table table-striped align-middle text-center mt-3 table-hover text-nowrap"
+          class="table table-striped align-middle text-center mt-3  text-nowrap"
     
         >
           <thead style="background-color: #78b3a4" class="text-white">
@@ -77,7 +78,7 @@
                 {{ user.type == 0 ? "admin" : "user" }}
               </td>
               <td @click="openModal(user.id, 0)">{{ user.phone }}</td>
-              <td @click="openModal(user.id, 0)">{{ user.dob }}</td>
+              <td @click="openModal(user.id, 0)">{{ changeFormat(user.dob) }}</td>
               <td @click="openModal(user.id, 0)">{{ user.address }}</td>
               <td @click="openModal(user.id, 0)">
                 {{ changeFormat(user.created_at) }}
@@ -122,10 +123,13 @@ import UserModal from "./UserModal.vue";
 import { mapGetters } from "vuex";
 import { changeDateFormat } from "../../services/ChangeDateFormat";
 import SuccessNoti from '../Error/SuccessNoti.vue';
+
+import ErrorNoti from '../Error/ErrorNoti.vue';
 export default {
   components: {
     UserModal,
     SuccessNoti,
+    ErrorNoti,
   },
   data() {
     return {
@@ -193,7 +197,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getAllUsers",'getHasMessage','getMessage']),
+    ...mapGetters(["getAllUsers",'getHasMessage','getMessage','getHasError']),
   },
 };
 </script>

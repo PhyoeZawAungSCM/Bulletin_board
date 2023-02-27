@@ -61,7 +61,7 @@
                     <div class="row mb-3">
                       <div class="col-5">Date of Birth</div>
                       <div class="col-7">
-                        {{ user.dob }}
+                        {{changeDateFormat(user.dob) }}
                       </div>
                     </div>
                     <div class="row mb-3">
@@ -74,7 +74,7 @@
                     <div class="row mb-3">
                       <div class="col-5">Created Date</div>
                       <div class="col-7">
-                        {{ user.created_at }}
+                        {{ changeDateFormat( user.created_at )}}
                       </div>
                     </div>
                     <div class="row mb-3">
@@ -86,7 +86,7 @@
                     <div class="row mb-3">
                       <div class="col-5">Updated Date</div>
                       <div class="col-7">
-                        {{ user.updated_at }}
+                        {{changeDateFormat(user.updated_at)  }}
                       </div>
                     </div>
                     <div class="row mb-3">
@@ -132,6 +132,7 @@
   <script>
 import { Modal } from "bootstrap/dist/js/bootstrap.bundle";
 import { http } from "../../services/http_service";
+import { changeDateFormat } from '../../services/ChangeDateFormat';
 export default {
   props: {
     mode: String,
@@ -161,6 +162,9 @@ export default {
       this.$store.dispatch('deleteUser',this.user.id);
       this.hideModal();
     },
+    changeDateFormat(date){
+      return changeDateFormat(date);
+    }
   },
   mounted() {
     this.modal = new Modal("#exampleModal", {});

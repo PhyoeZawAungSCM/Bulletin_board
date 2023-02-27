@@ -5,8 +5,8 @@
         <div class="card-header bg-success">
           <h3 class="text-white">Forgot Password?</h3>
         </div>
-        <error-noti :isActive="getHasError">{{ getMessage }}</error-noti>
-        <success-noti :isActive="getHasMessage">{{getMessage}}</success-noti>
+        <error-noti  v-if="getHasError" :isActive="getHasError">{{ getMessage }}</error-noti>
+        <success-noti v-if="getHasMessage" :isActive="getHasMessage">{{getMessage}}</success-noti>
         <ValidationObserver v-slot="{ handleSubmit }">
           <form @submit.prevent="handleSubmit(sendLink)">
             <div
@@ -77,7 +77,7 @@ export default {
             this.sending=false
             this.$store.state.noti.message = response.data.message;
             this.$store.state.noti.hasMessage = true;
-            console.log(response.data)
+            this.$router.push('/login');
         })
         .catch(error =>{
             this.sending=false

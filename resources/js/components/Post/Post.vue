@@ -201,6 +201,7 @@ export default {
   computed: {
     ...mapGetters(["getHasError", "getMessage"]),
   },
+
 };
 </script>
 

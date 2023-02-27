@@ -43,7 +43,7 @@
     </form>
     <div class="mx-3">
       <table
-        class="table table-striped align-middle text-center mt-3 table-hover"
+        class="table table-striped align-middle text-center mt-3"
       >
         <thead style="background-color: #78b3a4" class="text-white">
           <tr>
@@ -55,10 +55,10 @@
           </tr>
         </thead>
         <tbody class="fw-semibold text-black-50">
-          <tr v-if="getPosts.length == 0">
+          <tr v-if="getPosts.length == 0" >
             <td colspan="5">No data available in table</td>
           </tr>
-          <tr v-for="post in getPosts" :key="post.id">
+          <tr v-for="post in getPosts" :key="post.id" style="cursor: pointer">
             <td @click="openModal(post.id, 'detail')">{{ post.title }}</td>
             <td @click="openModal(post.id, 'detail')">
               {{ post.description }}
@@ -107,7 +107,8 @@
 <script>
 import Modal from "./PostModal.vue";
 import { mapGetters } from "vuex";
-import { changeDateFormat } from "../../services/ChangeDateFormat";
+import {changeDateFormat} from '../../services/ChangeDateFormat';
+
 import SuccessNoti from "../../components/Error/SuccessNoti.vue";
 export default {
   components: {

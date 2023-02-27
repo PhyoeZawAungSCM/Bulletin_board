@@ -13,6 +13,7 @@ import './services/validation';
 import  store from './Store';
 import VuePapaParse from 'vue-papa-parse';
 import Vue from 'vue';
+
 Vue.use(VuePapaParse)
 Vue.use(IconsPlugin)
 Vue.use(VueRouter)
