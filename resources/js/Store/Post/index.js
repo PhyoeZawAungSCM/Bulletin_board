@@ -67,9 +67,7 @@ export default {
         // getting all the post from api
         getPosts({ state, commit }, payload) {
             console.log(payload);
-            http()
-                .get("/sanctum/csrf-cookie")
-                .then((response) => {
+
                     http()
                         .get(
                             `/api/posts?search=${payload.search}&page=${payload.page}`
@@ -79,7 +77,7 @@ export default {
                             commit("GET_POSTS", response.data.data);
                         })
                         .catch((error) => console.log("error:", error));
-                });
+              
         },
 
         // create a post

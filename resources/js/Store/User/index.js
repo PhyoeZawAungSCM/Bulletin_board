@@ -59,6 +59,7 @@ export default {
             { state, rootState },
             { name, email, startDate, endDate, page }
         ) {
+            this.$Progress.start();
             if (startDate > endDate) {
                 rootState.noti.hasError = true;
                 rootState.noti.message = "end date must greater than start date";
@@ -70,6 +71,7 @@ export default {
                     .then((response) => {
                         state.lastPage = response.data.last_page;
                         state.users = response.data.data;
+                        this.$Progress.finish();
                     });
             }
         },
@@ -81,7 +83,10 @@ export default {
                     commit("REMOVE_USER", response.data.data);
                     rootState.noti.hasMessage = true;
                     rootState.noti.message = "User delete successfully";
-                });
+                })
+                .catch(error => {
+                    alert(error.response.data.error);
+                })
         },
     },
 };

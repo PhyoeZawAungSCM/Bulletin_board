@@ -9,7 +9,7 @@ interface PostServiceInterface{
    * To save post
    * @return Object $posts
    */
-    public function index();
+    public function index(Request $request);
 
     /**
      * to show a post

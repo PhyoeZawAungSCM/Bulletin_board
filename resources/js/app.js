@@ -12,8 +12,17 @@ import {ValidationProvider,ValidationObserver} from 'vee-validate';
 import './services/validation';
 import  store from './Store';
 import VuePapaParse from 'vue-papa-parse';
-import Vue from 'vue';
-
+import VueProgressBar from 'vue-progressbar'
+const options = {
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  inverse: false
+}
+Vue.use(VueProgressBar, options)
 Vue.use(VuePapaParse)
 Vue.use(IconsPlugin)
 Vue.use(VueRouter)
@@ -25,3 +34,5 @@ const app = new Vue({
     store,
     render:h => h(App),
 });
+
+export default app;

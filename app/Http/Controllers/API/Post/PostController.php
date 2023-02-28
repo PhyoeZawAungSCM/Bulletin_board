@@ -25,15 +25,15 @@ class PostController extends Controller
     {
         $this->postInterface = $postServiceInterface;
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json($this->postInterface->index());
+        return response()->json($this->postInterface->index($request));
     }
 
     /**
@@ -90,12 +90,18 @@ class PostController extends Controller
     public function destroy(Posts $post)
     {
         return $this->postInterface->destroy($post);
+
         $post->delete();
         return response()->json([
-            "message" => "Post delete success"
+
+            'message' => 'Post delete success'
         ], 200);
     }
-
+    /**
+     * upload csv file to the database
+     * @param Request $request contain a csv file
+     * @return Posts $posts
+     */
     public function uploadCsv(Request $request)
     {
         $request->validate([
@@ -103,6 +109,10 @@ class PostController extends Controller
         ]);
         return $this->postInterface->uploadCsv($request);
     }
+    /**
+     * download csv file
+     * @return File $csvfile
+     */
     public function downloadCsv()
     {
         return $this->postInterface->downloadCsv();

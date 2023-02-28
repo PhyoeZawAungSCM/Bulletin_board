@@ -1,7 +1,7 @@
 import { http, httpFile } from "../../services/http_service";
 import router from "../../router";
 import { isLogin, token } from "../../services/Auth_service";
-import Axios from "axios";
+import cryptoJs from "crypto-js";
 export default {
     state: {
         loginUser: {},
@@ -35,10 +35,6 @@ export default {
          *
          */
         Login({ state, commit, dispatch, rootState }, user) {
-            http()
-                .get("/sanctum/csrf-cookie")
-                .then((response) => {
-                    console.log("csrf", response);
                     http()
                         .post("/api/login", user)
                         .then((response) => {
@@ -47,9 +43,10 @@ export default {
                             dispatch("getUserProfile");
                             state.isLogin = true;
                             if (user.rememberMe) {
+                                let token = cryptoJs.AES.encrypt(response.data.token,'bulletinboard').toString();
                                 localStorage.setItem(
                                     "token",
-                                    response.data.token
+                                     token
                                 );
                             }
                             rootState.noti.hasMessage = true;
@@ -61,7 +58,7 @@ export default {
                             rootState.noti.message =
                                 error.response.data.message;
                         });
-                });
+
         },
 
         //
@@ -89,7 +86,7 @@ export default {
                     rootState.post.posts = [];
                     rootState.user.users = [];
                     dispatch("getPosts", { search: "", page: 1 });
-                    router.push("/posts-list");
+                   // router.push("/posts-list");
                 });
         },
         updateProfile({ commit, state, rootState }, user) {

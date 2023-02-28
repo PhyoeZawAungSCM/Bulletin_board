@@ -25,13 +25,12 @@ const router = new VueRouter({
             path: "/",
             name: "/",
             beforeEnter: (to, form, next) => {
-                if (!isLogin()) {
+               
                     next("/posts-list");
-                } else {
-                    next("/home");
+               
                 }
             },
-        },
+        
         {
             path: "/home",
             name: "home",

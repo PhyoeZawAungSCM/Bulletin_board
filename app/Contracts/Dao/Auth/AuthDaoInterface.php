@@ -1,12 +1,14 @@
 <?php
+
 namespace App\Contracts\Dao\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 
-interface AuthDaoInterface{
+interface AuthDaoInterface
+{
     /**
-     * Login user 
+     * Login user
      * @param Array $validated
      * @return User user and token
      */
@@ -14,27 +16,27 @@ interface AuthDaoInterface{
 
     /**
      * Logout user
-     * 
+     *
      */
     public function logout(Request $request);
 
     /**
      * Update profile of login user
      * @param Request $request
-     * @param User $user
-     * @return User $user
+     * @param App/Models/User $user
+     * @return App/Models/User $user
      */
-    public function update(Request $request,User $user);
+    public function update(Request $request, User $user);
 
     /**
      * Change password for user
      * @param Request $request
-     * @return JSON with message of success or not 
+     * @return JSON with message of success or not
      */
     public function changePassword(Request $request);
 
     /**
-     * Requesting for password reset link 
+     * Requesting for password reset link
      * @param Request $request['email']
      * @return User $user find with email
      */
@@ -42,11 +44,11 @@ interface AuthDaoInterface{
 
     /**
      * Create token for user and store in database
-     * @param $email for email field
-     * @param  $token for token field
+     * @param String $email for email field
+     * @param String $token for token field
      * @return null
      */
-    public function createToken($email , $token);
+    public function createToken($email, $token);
 
     /**
      * Check for the imcoming token exists or not
