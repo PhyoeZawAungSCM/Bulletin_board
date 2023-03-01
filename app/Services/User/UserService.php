@@ -25,11 +25,20 @@ class UserService implements UserServiceInterface
 		$this->userDao = $userDaoInterface;
 	}
 
+	/**
+	 * get users of the bulletin board
+	 * @return Response
+	 */
 	public function index()
 	{
 		return response()->json($this->userDao->index());
 	}
 
+	/**
+	 * to create a user and store
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function store($request)
 	{
 		try {
@@ -46,16 +55,29 @@ class UserService implements UserServiceInterface
 		}
 	}
 
+	/**
+	 * to get a specific user
+	 * @param int $id
+	 * @return Response
+	 */
 	public function show($id)
 	{
 		return response()->json($this->userDao->show($id));
 	}
 
+	/**
+	 * to update a user
+	 */
 	public function update(Request $request, User $user)
 	{
 		// no need to update the user because that is update in auth after login as this user
 	}
 
+	/**
+	 * to delete a user
+	 * @param User $user
+	 * @return Response
+	 */
 	public function destroy(User $user)
 	{
 		try {

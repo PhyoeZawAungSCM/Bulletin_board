@@ -6,11 +6,18 @@ use App\Contracts\Dao\User\UserDaoInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * System Name:BulletinBoard
+ * Module Name:UserDao
+ */
 class UserDao implements UserDaoInterface
 {
+	/**
+	 * Users of the bulletin board
+	 * @return User $users based on the type of user
+	 */
 	public function index()
 	{
 		// getting the user
@@ -55,6 +62,11 @@ class UserDao implements UserDaoInterface
 			)->orderBy('id', 'desc')->paginate(5);
 	}
 
+	/**
+	 * to store a created user
+	 * @param Request $request
+	 * @return User $user
+	 */
 	public function store($request)
 	{
 		$path = $request->file('profile')->store('profiles');
@@ -74,6 +86,11 @@ class UserDao implements UserDaoInterface
 		return $user;
 	}
 
+	/**
+	 * to show a specific user
+	 * @param User $id of the user
+	 * @return User $user
+	 */
 	public function show($id)
 	{
 		// $User = DB::select(DB::raw('select
@@ -114,6 +131,11 @@ class UserDao implements UserDaoInterface
 	{
 	}
 
+	/**
+	 * to delete a user
+	 * @param User $user
+	 * @return User $user
+	 */
 	public function destroy(User $user)
 	{
 		$user->delete();

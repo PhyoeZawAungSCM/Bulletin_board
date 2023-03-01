@@ -55,14 +55,19 @@ export default {
                     console.log(error);
                 });
         },
+
+        /**
+         * getting all the user of bulletin board
+         */
         getUsers(
             { state, rootState },
             { name, email, startDate, endDate, page }
         ) {
-            this.$Progress.start();
+            
             if (startDate > endDate) {
                 rootState.noti.hasError = true;
-                rootState.noti.message = "end date must greater than start date";
+                rootState.noti.message =
+                    "end date must greater than start date";
             } else {
                 http()
                     .get(
@@ -71,11 +76,15 @@ export default {
                     .then((response) => {
                         state.lastPage = response.data.last_page;
                         state.users = response.data.data;
-                        this.$Progress.finish();
+                        
                     });
             }
         },
-
+        
+        /**
+         *delete a user
+         * @param {int} id 
+         */
         deleteUser({ commit, rootState }, id) {
             http()
                 .delete(`api/users/${id}`)
@@ -84,9 +93,9 @@ export default {
                     rootState.noti.hasMessage = true;
                     rootState.noti.message = "User delete successfully";
                 })
-                .catch(error => {
+                .catch((error) => {
                     alert(error.response.data.error);
-                })
+                });
         },
     },
 };

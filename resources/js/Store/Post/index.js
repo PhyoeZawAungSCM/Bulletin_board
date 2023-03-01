@@ -68,16 +68,13 @@ export default {
         getPosts({ state, commit }, payload) {
             console.log(payload);
 
-                    http()
-                        .get(
-                            `/api/posts?search=${payload.search}&page=${payload.page}`
-                        )
-                        .then((response) => {
-                            state.lastPage = response.data.last_page;
-                            commit("GET_POSTS", response.data.data);
-                        })
-                        .catch((error) => console.log("error:", error));
-              
+            http()
+                .get(`/api/posts?search=${payload.search}&page=${payload.page}`)
+                .then((response) => {
+                    state.lastPage = response.data.last_page;
+                    commit("GET_POSTS", response.data.data);
+                })
+                .catch((error) => console.log("error:", error));
         },
 
         // create a post
@@ -158,16 +155,6 @@ export default {
                 router.push("/login");
                 return;
             }
-            // httpdownload().get('api/download-posts')
-            // .then(response => {
-            //     console.log(response.data);
-            //     var FILE = window.URL.createObjectURL(new Blob([response.data]));
-            //     var docUrl = document.createElement('x');
-            //     docUrl.href = FILE;
-            //     docUrl.setAttribute('download', 'download.csv');
-            //     document.body.appendChild(docUrl);
-            //     docUrl.click();
-            // })
             axios({
                 url: "http://localhost:8000/api/download-posts",
                 method: "GET",

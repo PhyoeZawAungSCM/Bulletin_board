@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExcelDownload;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('auth.reset-password', ['token' => $token]);
 // })->middleware('guest')->name('password.reset');
 
-Route::fallback(function(){
-    return view('welcome');
+Route::fallback(function () {
+	return view('welcome');
 });
 
-
+Route::get('posts/download', [ExcelDownload::class, 'downloadExcel']);
 
 // Route::get('/{vue_capture?}', function() {
 //     return view('welcome');

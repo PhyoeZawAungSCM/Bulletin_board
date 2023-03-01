@@ -12,18 +12,37 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
 
+/**
+ * System Name : Bulletin Board
+ * Module Name : Auth Dao
+ */
 class AuthDao implements AuthDaoInterface
 {
+	/**
+	 * Login the user
+	 * @param Array $validated
+	 * @return Boolean if login success or not
+	 */
 	public function login($validated)
 	{
 		return Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']]);
 	}
 
+	/**
+	 * logout the user
+	 * @param Request $request
+	 */
 	public function logout(Request $request)
 	{
 		// logout no need to do here
 	}
 
+	/**
+	 * update a user profile
+	 * @param Request $request
+	 * @param User $user
+	 * @return User $user
+	 */
 	public function update(Request $request, User $user)
 	{
 		// if the request has a image file
@@ -58,6 +77,11 @@ class AuthDao implements AuthDaoInterface
 		return $user;
 	}
 
+	/**
+	 * change password of user
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function changePassword(Request $request)
 	{
 		// get the auth user
@@ -88,12 +112,23 @@ class AuthDao implements AuthDaoInterface
 		], 200);
 	}
 
+	/**
+	 * Request a password reset link
+	 * @param Request $request
+	 * @return Boolean
+	 */
 	public function forgotPassword(Request $request)
 	{
 		// check the user find or fail and return
 		return User::where('email', $request->email)->firstOrFail();
 	}
 
+	/**
+	 * create token for user and store in datebase
+	 * @param String $email
+	 * @param String $token
+	 * @return void
+	 */
 	public function createToken($email, $token)
 	{
 		// create a token in password_reset table
@@ -104,12 +139,22 @@ class AuthDao implements AuthDaoInterface
 		]);
 	}
 
+	/**
+	 * check the token
+	 * @param Request $request
+	 * @return Boolean for the token exist or not
+	 */
 	public function checkToken(Request $request)
 	{
 		// check the token exists in table
 		return DB::table('password_resets')->where('token', $request->token)->exists();
 	}
 
+	/**
+	 * Resettin the password with token
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function resetPassword(Request $request)
 	{
 		// begin the database transaction

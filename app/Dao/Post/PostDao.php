@@ -6,10 +6,18 @@ use App\Contracts\Dao\Post\PostDaoInterface;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
+/**
+ * System Name : Bulletin Board
+ * Module Name : PostDao
+ */
 class PostDao implements PostDaoInterface
 {
+	/**
+	 * to get all the post based on type
+	 * @param Request $request
+	 * @return Posts $posts
+	 */
 	public function index(Request $request)
 	{
 		$token = $request->bearerToken();
@@ -52,11 +60,21 @@ class PostDao implements PostDaoInterface
 		}
 	}
 
+	/**
+	 * to get a post
+	 * @param Posts $post
+	 * @return Posts $posts
+	 */
 	public function show(Posts $post)
 	{
 		return $post;
 	}
 
+	/**
+	 * to create a post
+	 * @param Array $validated
+	 * @return Posts $post
+	 */
 	public function store($validated)
 	{
 		$post = Posts::create([
@@ -69,6 +87,12 @@ class PostDao implements PostDaoInterface
 		return $post;
 	}
 
+	/**
+	 * to update a post
+	 * @param Array $validated
+	 * @param Posts $post
+	 * @return Posts $post
+	 */
 	public function update($validated, $post)
 	{
 		$post->update([
@@ -81,6 +105,11 @@ class PostDao implements PostDaoInterface
 		return $post;
 	}
 
+	/**
+	 * to delete a post
+	 * @param Posts $post
+	 * @return Posts $post
+	 */
 	public function destroy($post)
 	{
 		$post->update(['deleted_user_id' => Auth::id()]);
@@ -89,6 +118,11 @@ class PostDao implements PostDaoInterface
 		return $post;
 	}
 
+	/**
+	 * to upload csv file
+	 * @param Posts $post
+	 * @return Posts $post
+	 */
 	public function uploadCsv($post)
 	{
 		$post = Posts::create([
@@ -102,11 +136,14 @@ class PostDao implements PostDaoInterface
 		return $post;
 	}
 
+	/**
+	 * to download csv file
+	 * @return Posts $posts
+	 */
 	public function downloadCsv()
 	{
 		$user = Auth::user();
 		if ($user->type == '0') {
-			
 			// $results = Posts::withTrashed()->get();
 			// foreach ($results as $result) {
 			// 	Log::info(print_r($result, true));

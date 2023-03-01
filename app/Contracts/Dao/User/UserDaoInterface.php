@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 interface UserDaoInterface{
 
     /**
-     * User of the board
+     * Users of the board 
      * @return Users $users of the page based on type 
      */
     public function index();
@@ -21,10 +21,10 @@ interface UserDaoInterface{
 
     /**
      * to store a create user
-     * @param Validator $validated
+     * @param Request $request
      * @return User $user
      */
-    public function store($validated);
+    public function store(Request $request);
 
     /**
      * to update a user

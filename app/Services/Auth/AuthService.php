@@ -32,6 +32,8 @@ class AuthService implements AuthServiceInterface
 
 	/**
 	 * Login  as created user
+	 * @param Array $validated
+	 * @return Response
 	 */
 	public function login($validated)
 	{
@@ -69,6 +71,11 @@ class AuthService implements AuthServiceInterface
 		}
 	}
 
+	/**
+	 * Logout the login user
+	 * @param Reauest $request
+	 * @return Response
+	 */
 	public function logout(Request $request)
 	{
 		// invoking the token
@@ -83,6 +90,12 @@ class AuthService implements AuthServiceInterface
 		], 200);
 	}
 
+	/**
+	 * Update a user pofile
+	 * @param Request $request
+	 * @param User $user
+	 * @return Response
+	 */
 	public function update(Request $request, User $user)
 	{
 		try {
@@ -100,11 +113,21 @@ class AuthService implements AuthServiceInterface
 		}
 	}
 
+	/**
+	 * to change a password
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function changePassword(Request $request)
 	{
 		return $this->auth->changePassword($request);
 	}
 
+	/**
+	 * Request a password reset link
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function forgotPassword(Request $request)
 	{
 		try {
@@ -146,6 +169,11 @@ class AuthService implements AuthServiceInterface
 		}
 	}
 
+	/**
+	 * checking the token from the link
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function checkToken(Request $request)
 	{
 		try {
@@ -167,6 +195,11 @@ class AuthService implements AuthServiceInterface
 		}
 	}
 
+	/**
+	 * Resetting the password
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function resetPassword(Request $request)
 	{
 		return $this->auth->resetPassword($request);

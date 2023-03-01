@@ -15,7 +15,7 @@ interface AuthServiceInterface{
     /**
      * Logout user
      * @param Request $request
-     * @return json object with message
+     * @return  Response json object with message
      */
     public function logout(Request $request);
 
@@ -23,7 +23,7 @@ interface AuthServiceInterface{
      * Update user service
      * @param Request $request
      * @param User $user
-     * @return JSON data with message of success or not and $user
+     * @return Response JSON data with message of success or not and $user
      */
     public function update(Request $request,User $user);
 
@@ -37,21 +37,21 @@ interface AuthServiceInterface{
      /**
      * Requesting for password reset link 
      * @param Request $request['email']
-     * @return JSON with message of success or not
+     * @return Response JSON with message of success or not
      */
     public function forgotPassword(Request $request);
 
     /**
      * Check for the imcoming token exists or not
      * @param Request $request['token']
-     * @return JSON with message of success or not 
+     * @return Response JSON with message of success or not 
      */
     public function checkToken(Request $request);
 
     /**
      * Resetting the password with token
      * @param Request $request['token','password','password_confirmation']
-     * @return JSON with message of success or not
+     * @return Response JSON with message of success or not
      */
     public function resetPassword(Request $request);
 }

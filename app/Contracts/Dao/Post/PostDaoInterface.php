@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 interface PostDaoInterface{
 
    /**
-   * To save post
+   * to get all posts based on type
    * @return Object $posts
    */
   public function index(Request $request);

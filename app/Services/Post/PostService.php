@@ -33,6 +33,11 @@ class PostService implements PostServiceInterface
 		$this->postDao = $postDao;
 	}
 
+	/**
+	 * to get the posts
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function index(Request $request)
 	{
 		try {
@@ -45,11 +50,21 @@ class PostService implements PostServiceInterface
 		}
 	}
 
+	/**
+	 * to get a specific post
+	 * @param Posts $post
+	 * @return Response
+	 */
 	public function show(Posts $post)
 	{
 		return $this->postDao->show($post);
 	}
 
+	/**
+	 * to store a post
+	 * @param Array $validated
+	 * @return Response
+	 */
 	public function store($validated)
 	{
 		try {
@@ -73,6 +88,13 @@ class PostService implements PostServiceInterface
 		}
 	}
 
+	/**
+	 * to update a specific post
+	 * @param Array $validated
+	 * @param Posts $post
+	 * @return Response
+	 *
+	 */
 	public function update($validated, $post)
 	{
 		try {
@@ -89,6 +111,11 @@ class PostService implements PostServiceInterface
 		}
 	}
 
+	/**
+	 * to delete a post
+	 * @param Posts $post
+	 * @return Response
+	 */
 	public function destroy($post)
 	{
 		try {
@@ -105,6 +132,11 @@ class PostService implements PostServiceInterface
 		}
 	}
 
+	/**
+	 * to upload csv file
+	 *@param Request $request
+	 * @return Response
+	 */
 	public function uploadCsv(Request $request)
 	{
 		// get the real extension of the file because the file may stores as .txt in storage
@@ -172,6 +204,10 @@ class PostService implements PostServiceInterface
 		}
 	}
 
+	/**
+	 * to down posts as csv file
+	 * @return Response
+	 */
 	public function downloadCsv()
 	{
 		// getting the auth user
