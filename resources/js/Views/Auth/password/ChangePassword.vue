@@ -5,7 +5,7 @@
         <div class="card-header bg-success">
           <h3 class="text-white">Change Password</h3>
         </div>
-        <error-noti :isActive="hasError">{{ passwordError }}</error-noti>
+        <error-noti :isActive="getHasError" v-if="getHasError">{{ getMessage }}</error-noti>
         <div
           class="card-body justify-content-center d-block m-auto"
           style="width: 700px"
@@ -92,6 +92,7 @@
 <script>
 import { http } from "../../../services/http_service";
 import errorNoti from "../../../components/Error/ErrorNoti.vue";
+import { mapGetters } from "vuex";
 export default {
   components: {
     errorNoti,
@@ -102,7 +103,6 @@ export default {
       newPassword: "",
       newConfirmPassword: "",
       passwordError: "",
-      hasError: false,
     };
   },
   methods: {
@@ -121,11 +121,15 @@ export default {
           console.log(response);
         })
         .catch((error) => {
-          this.hasError = true;
-          this.passwordError = error.response.data.error;
+          this.$store.state.noti.hasError = true;
+          this.$store.state.noti.message= error.response.data.error;
         });
     },
+    
   },
+  computed:{
+    ...mapGetters(['getHasError','getMessage'])
+  }
 };
 </script>
 

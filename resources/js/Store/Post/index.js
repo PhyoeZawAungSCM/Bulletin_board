@@ -142,6 +142,8 @@ export default {
                     response.data.data.forEach((data) => {
                         commit("ADD_POST", data);
                     });
+                    rootState.noti.hasMessage = true;
+                    rootState.noti.message = "All post upload successfully";
                     router.push("/posts-list");
                 })
                 .catch((error) => {

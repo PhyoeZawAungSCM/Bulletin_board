@@ -4,13 +4,16 @@
         <h3>Seattle Consulting Myanmar</h3>
     </div>
     <div class="pe-3">
+      
         <h5 class="text-success">Copyright &copy; Seattle Consulting Myanmar Co., LTD.All Right Reserved.</h5>
-    </div>
+      
+      </div>
+  
   </div>
 </template>
 <script>
 export default {
-
+ 
 }
 </script>
 

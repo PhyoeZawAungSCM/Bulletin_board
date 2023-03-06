@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-8">
                   <ValidationProvider
-                    rules="required|max:225"
+                    rules="required|max:255"
                     v-slot="{ errors }"
                   >
                     <input

@@ -24,8 +24,7 @@ const router = new VueRouter({
         {
             path: "/",
             name: "/",
-            beforeEnter: (to, form, next) => {
-               
+            beforeEnter: (to, form, next) => {     
                     next("/posts-list");
                
                 }
