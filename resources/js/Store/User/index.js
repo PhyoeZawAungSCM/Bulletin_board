@@ -5,7 +5,7 @@ export default {
         createdTempUser: {},
         users: [],
         page: 1,
-        lastPage: null,
+        lastPage: 0,
     },
     getters: {
         getAllUsers(state) {

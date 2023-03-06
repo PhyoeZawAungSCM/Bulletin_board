@@ -5,7 +5,7 @@ export default {
         tempPost: {},
         posts: [],
         page: 1,
-        lastPage: null,
+        lastPage: 0,
     },
     mutations: {
         // set the temp post

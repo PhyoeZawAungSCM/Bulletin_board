@@ -86,7 +86,7 @@ export default {
                     rootState.post.posts = [];
                     rootState.user.users = [];
                     dispatch("getPosts", { search: "", page: 1 });
-                   // router.push("/posts-list");
+                    router.push("/posts-list");
                 });
         },
         updateProfile({ commit, state, rootState }, user) {

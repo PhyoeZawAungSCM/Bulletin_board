@@ -8,8 +8,6 @@ export const changeDateFormat = (date) => {
 
     let formatDate = unformatDate.getFullYear() + '/' +
     (unformatDate.getMonth() + 1 < 10 ? '0' : '') + (unformatDate.getMonth() + 1) + '/' +
-    (unformatDate.getDate() < 10 ? '0' : '') + unformatDate.getDate() ;
-    
-    console.log(unformatDate.getMonth());
+    (unformatDate.getDate() < 10 ? '0' : '') + unformatDate.getDate();
     return formatDate;
 }

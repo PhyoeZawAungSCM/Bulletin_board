@@ -81,24 +81,11 @@
           </tr>
         </tbody>
       </table>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-          <li class="page-item">
-            <button class="page-link" @click="previous">Previous</button>
-          </li>
-          <li
-            class="page-item"
-            :class="page == p ? 'active' : ''"
-            v-for="p in $store.state.post.lastPage"
-            :key="p"
-          >
-            <button class="page-link" @click="loadNewPage(p)">{{ p }}</button>
-          </li>
-          <li class="page-item">
-            <button class="page-link" @click="next">Next</button>
-          </li>
-        </ul>
-      </nav>
+      <paginator 
+      :firstViewPageNumber="1"
+      :lastPage="$store.state.post.lastPage"
+      @paginationFunction = "loadNewPage"
+      />
     </div>
     <modal ref="postmodal" :mode="mode" />
   </div>
@@ -108,12 +95,15 @@
 import Modal from "./PostModal.vue";
 import { mapGetters } from "vuex";
 import {changeDateFormat} from '../../services/ChangeDateFormat';
-
 import SuccessNoti from "../../components/Error/SuccessNoti.vue";
+import Paginator from '../Paginator/Paginator.vue';
+
 export default {
   components: {
     Modal,
     SuccessNoti,
+    Paginator,
+
   },
   data() {
     return {
@@ -144,20 +134,6 @@ export default {
         search: this.searchInput,
         page: this.page,
       });
-    },
-    previous() {
-      console.log("Previous");
-      if (this.page > 1) {
-        this.page -= 1;
-        this.loadNewPage(this.page);
-      }
-    },
-    next() {
-      console.log("next");
-      if (this.page < this.$store.state.post.lastPage) {
-        this.page = this.page + 1;
-        this.loadNewPage(this.page);
-      }
     },
     uploadPost() {
       this.$router.push("/upload-post");

@@ -95,24 +95,11 @@
           </tbody>
         </table>
       </div>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-          <li class="page-item">
-            <button class="page-link" @click="previous">Previous</button>
-          </li>
-          <li
-            class="page-item"
-            :class="page == p ? 'active' : ''"
-            v-for="p in $store.state.user.lastPage"
-            :key="p"
-          >
-            <button class="page-link" @click="loadNewPage(p)">{{ p }}</button>
-          </li>
-          <li class="page-item">
-            <button class="page-link" @click="next">Next</button>
-          </li>
-        </ul>
-      </nav>
+      <paginator 
+      :firstViewPageNumber="1"
+      :lastPage="$store.state.user.lastPage"
+      @paginationFunction = "loadNewPage"
+      />
     </div>
     <UserModal ref="userModal" :mode="mode" />
   </div>
@@ -125,11 +112,13 @@ import { changeDateFormat } from "../../services/ChangeDateFormat";
 import SuccessNoti from '../Error/SuccessNoti.vue';
 
 import ErrorNoti from '../Error/ErrorNoti.vue';
+import Paginator from '../Paginator/Paginator.vue';
 export default {
   components: {
     UserModal,
     SuccessNoti,
     ErrorNoti,
+    Paginator,
   },
   data() {
     return {
@@ -177,20 +166,6 @@ export default {
         endDate: this.endDate,
         page: this.page,
       });
-    },
-    previous() {
-      console.log("Previous");
-      if (this.page > 1) {
-        this.page -= 1;
-        this.loadNewPage(this.page);
-      }
-    },
-    next() {
-      console.log("next");
-      if (this.page < this.$store.state.user.lastPage) {
-        this.page = this.page + 1;
-        this.loadNewPage(this.page);
-      }
     },
     changeFormat(date) {
       return changeDateFormat(date);
