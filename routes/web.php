@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExcelDownload;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/',function(){
+//     return view('welcome');
+// });
+// Route::get('/reset-password/{token}', function ($token) {
+//     return view('auth.reset-password', ['token' => $token]);
+// })->middleware('guest')->name('password.reset');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::fallback(function () {
+	return view('welcome');
 });
+
+Route::get('posts/download', [ExcelDownload::class, 'downloadExcel']);
+
+// Route::get('/{vue_capture?}', function() {
+//     return view('welcome');
+// })->where('vue_capture', '[\/\w\.-]*');
+
+// Route::view("/{any?}", "welcome")->where("any", ".*");
