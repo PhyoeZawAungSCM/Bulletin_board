@@ -1,11 +1,15 @@
 import { http, httpFile } from "../../services/http_service";
 import router from "../../router";
+import { addNumberToPaginate } from "../../services/addNumber";
 export default {
     state: {
         createdTempUser: {},
         users: [],
+        to: 0,
+        per_page: 0,
         page: 1,
         lastPage: 0,
+        no: [],
     },
     getters: {
         getAllUsers(state) {
@@ -63,7 +67,6 @@ export default {
             { state, rootState },
             { name, email, startDate, endDate, page }
         ) {
-            
             if (startDate > endDate) {
                 rootState.noti.hasError = true;
                 rootState.noti.message =
@@ -74,16 +77,24 @@ export default {
                         `api/users?name=${name}&email=${email}&startDate=${startDate}&endDate=${endDate}&page=${page}`
                     )
                     .then((response) => {
+                        let no = addNumberToPaginate(
+                            response.data.to,
+                            response.data.per_page
+                        );
+                        let users = response.data.data;
+                        users.forEach((user, index) => {
+                            user.no = no[index];
+                        });
+                        console.log(users);
                         state.lastPage = response.data.last_page;
-                        state.users = response.data.data;
-                        
+                        state.users = users;
                     });
             }
         },
-        
+
         /**
          *delete a user
-         * @param {int} id 
+         * @param {int} id
          */
         deleteUser({ commit, rootState }, id) {
             http()
@@ -94,7 +105,8 @@ export default {
                     rootState.noti.message = "User delete successfully";
                 })
                 .catch((error) => {
-                    alert(error.response.data.error);
+                    rootState.noti.hasError = true;
+                    rootState.noti.message = "Cannot delete this user";
                 });
         },
     },

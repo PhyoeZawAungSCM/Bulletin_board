@@ -40,7 +40,7 @@ class UserDao implements UserDaoInterface
 							}
 						);
 				}
-			)->orderBy('id', 'desc')->paginate(5);
+			)->orderBy('id', 'desc')->paginate(config('constant.paginatePage'));
 		}
 		// if the user is not admin
 		return User::where('create_user_id', $user->id)
@@ -59,7 +59,7 @@ class UserDao implements UserDaoInterface
 							}
 						);
 				}
-			)->orderBy('id', 'desc')->paginate(5);
+			)->orderBy('id', 'desc')->paginate(config('constant.paginatePage'));
 	}
 
 	/**

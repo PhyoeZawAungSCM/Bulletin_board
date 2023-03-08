@@ -33,7 +33,7 @@ class PostDao implements PostDaoInterface
 								$query->where('posts.title', 'like', '%' . request('search') . '%')
 						->orWhere('posts.description', 'like', '%' . request('search') . '%');
 							})->orderby('id', 'desc')
-							->paginate(5, ['posts.id', 'posts.title', 'posts.description', 'posts.created_at', 'posts.status', 'users.name']);
+							->paginate(config('constant.paginatePage'), ['posts.id', 'posts.title', 'posts.description', 'posts.created_at', 'posts.status', 'users.name']);
 			// if the user is a normal user just returning a user's created posts
 			} elseif ($user->type == '1') {
 				return Posts::join('users', 'posts.create_user_id', '=', 'users.id')
@@ -54,7 +54,7 @@ class PostDao implements PostDaoInterface
 					});
 				})
 				->paginate(
-					5,
+					config('constant.paginatePage'),
 					['posts.id', 'posts.title', 'posts.description', 'posts.created_at', 'posts.status', 'users.name']
 				);
 		}

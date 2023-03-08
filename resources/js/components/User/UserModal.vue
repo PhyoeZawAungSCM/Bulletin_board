@@ -172,5 +172,8 @@ export default {
 };
 </script>
   
-  <style>
+<style>
+.col-7{
+  word-wrap: break-word;
+}
 </style>

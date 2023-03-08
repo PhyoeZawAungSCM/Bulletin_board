@@ -71,7 +71,7 @@
               v-for="user in getAllUsers"
               :key="user.id"
             >
-              <td @click="openModal(user.id, 0)">{{ user.id }}</td>
+              <td @click="openModal(user.id, 0)">{{ user.no }}</td>
               <td @click="openModal(user.id, 0)">{{ user.name }}</td>
               <td @click="openModal(user.id, 0)">{{ user.email }}</td>
               <td @click="openModal(user.id, 0)">
