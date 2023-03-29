@@ -1,0 +1,4 @@
+/DownloadCsv/
+/profiles
+*
+!.gitignore
