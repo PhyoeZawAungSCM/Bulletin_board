@@ -141,24 +141,30 @@ class AuthService implements AuthServiceInterface
 			$this->auth->createToken($user->email, $token);
 
 			// sent the mail with the link of with this token
-			Mail::send('resetMail', ['token'=>$token, 'user'=>$user], function ($message) use ($user) {
-				$message->from('noreply@gmail.com', 'Bulletin_board');
-				$message->sender('scm.phyoezawaung@gmail.com', 'Phyoe Zaw Aung');
-				$message->to($user->email, $user->name);
-				$message->subject('Bulletin_board reset password');
-			});
-
-			// if the mail fail
-			if (Mail::failures()) {
+			try {
+				Mail::send('resetMail', ['token'=>$token, 'user'=>$user], function ($message) use ($user) {
+					$message->from('noreply@gmail.com', 'Bulletin_board');
+					$message->sender('scm.phyoezawaung@gmail.com', 'Phyoe Zaw Aung');
+					$message->to($user->email, $user->name);
+					$message->subject('Bulletin_board reset password');
+				});
+			} catch(Throwable $th) {
 				return response()->json([
-					'message'=> 'Some error occur in sending mail please try again'
+					'message'=> 'Some error occur in sending mail please try again later',
+					'error'  => $th->getMessage()
 				], 500);
 			}
+						// if the mail fail
+						if (Mail::failures()) {
+							return response()->json([
+								'message'=> 'Some error occur in sending mail please try again'
+							], 500);
+						}
 
-			// if success
-			return response()->json([
-				'message'=> 'Email Send with password reset instructions',
-			], 200);
+						// if success
+						return response()->json([
+							'message'=> 'Email Send with password reset instructions',
+						], 200);
 
 			// if no user found in use table because we use findOfFail
 		} catch(ModelNotFoundException $e) {

@@ -6,7 +6,7 @@
           <h3 class="text-white">Register</h3>
         </div>
         <div class="card-body justify-content-center d-block m-auto" style="width: 600px">
-          <ValidationObserver v-slot="{ handleSubmit }">
+          <ValidationObserver v-slot="{ handleSubmit }" ref="form">
             <form @submit.prevent="
               isConfirm
                 ? handleSubmit(Confirm)
@@ -101,7 +101,12 @@
                   <label for="phone">Phone</label>
                 </div>
                 <div class="col-8">
-                  <input type="text" class="form-control" id="phone" v-model="user.phone" />
+                  <ValidationProvider v-slot="{ errors }" rules="phone|min:8|max:11" name="Phone">
+                    <input type="text" class="form-control" id="phone" v-model="user.phone" />
+                    <span class="invalid-feedback">{{
+                      errors[0]
+                    }}</span>
+                  </ValidationProvider>
                 </div>
               </div>
               <!-- phone input -->
@@ -155,7 +160,7 @@
                   <button class="btn btn-primary" type="submit">
                     Confirm
                   </button>
-                  <button class="btn btn-secondary" @click="cancel">
+                  <button class="btn btn-secondary" type='button' @click="cancel">
                     Cancel
                   </button>
                 </div>
@@ -165,7 +170,7 @@
                   <button class="btn btn-primary" type="submit">
                     Register
                   </button>
-                  <button class="btn btn-secondary" @click="clear">
+                  <button class="btn btn-secondary" type="button" @click="clear">
                     Clear
                   </button>
                 </div>
@@ -228,6 +233,7 @@ export default {
         address: "",
         profile: "",
       };
+      this.$refs.profile.value = null;
     },
     cancel() {
       this.$router.push("/register");

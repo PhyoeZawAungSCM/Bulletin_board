@@ -93,32 +93,6 @@ class UserDao implements UserDaoInterface
 	 */
 	public function show($id)
 	{
-		// $User = DB::select(DB::raw('select
-		//                 user.id,
-		//                 user.name,
-		//                 user.email,
-		//                 user.profile,
-		//                 user.type,
-		//                 user.phone,
-		//                 user.address,
-		//                 user.dob,user.
-		//                 created_at,user.
-		//                 updated_at,
-		//                 creator.name as creatorName ,
-		//                 updator.name as updatorName
-		//                 from users as user
-		//                 inner join users as creator on user.create_user_id = creator.id
-		//                 inner join users as updator on user.updated_user_id = updator.id
-		//                 where user.id = ?'), [$id]);
-
-		// return $User;
-		// $user = Db::table('users as user')
-		// 	->join('users as creator', 'user.create_user_id', '=', 'creator.id')
-		// 	->join('users as updator', 'user.updated_user_id', '=', 'updator.id')
-		// 	->where('user.id', $id)
-		// 		->select('user.*', 'updator.name as updator_name', 'creator.name as creator_name')
-		// 		->get();
-		// $user = User::where('id',$id)->get();
 		$user = User::where('users.id', $id)
 		->join('users as creator', 'users.create_user_id', '=', 'creator.id')
 		->join('users as updator', 'users.updated_user_id', '=', 'updator.id')

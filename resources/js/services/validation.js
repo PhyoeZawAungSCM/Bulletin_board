@@ -1,6 +1,6 @@
 
 import { extend } from "vee-validate";
-import {email, min, required,max,confirmed, image,size} from 'vee-validate/dist/rules';
+import {email, min, required,max,confirmed, image,size,numeric} from 'vee-validate/dist/rules';
 extend('required',{
     ...required,
     message:"{_field_} can't be blank"
@@ -29,3 +29,7 @@ extend('size',{
     ...size,
     message:"Profile must not exceed 2MB of file size"
 });
+extend('phone',{
+    ...numeric,
+    message:'{_field_} must be a number'
+})

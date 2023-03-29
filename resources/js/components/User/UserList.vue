@@ -48,7 +48,7 @@
               </td>
               <td @click="openModal(user.id, 0)">{{ user.phone }}</td>
               <td @click="openModal(user.id, 0)">{{ changeFormat(user.dob) }}</td>
-              <td @click="openModal(user.id, 0)">{{ user.address }}</td>
+              <td class="text-wrap" @click="openModal(user.id, 0)">{{ user.address }}</td>
               <td @click="openModal(user.id, 0)">
                 {{ changeFormat(user.created_at) }}
               </td>
@@ -141,9 +141,3 @@ export default {
   },
 };
 </script>
-<style>
-.table-wrapper {
-  overflow: auto;
-  display: inline-block;
-}
-</style>
