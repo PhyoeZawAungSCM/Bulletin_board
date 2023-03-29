@@ -8,23 +8,14 @@
         <error-noti v-if="getHasError" :isActive="getHasError">{{
           getMessage
         }}</error-noti>
-        <div
-          class="card-body justify-content-center d-block m-auto"
-          style="width: 600px"
-        >
+        <div class="card-body justify-content-center d-block m-auto" style="width: 600px">
           <div class="row mb-3 align-items-center">
             <div class="col-3 text-end">
               <label for="title">CSV file</label>
               <span class="text-danger">*</span>
             </div>
             <div class="col-8">
-              <input
-                class="form-control"
-                type="file"
-                id="csvFile"
-                @change="fileUpload"
-                ref="upload"
-              />
+              <input class="form-control" type="file" id="csvFile" @change="fileUpload" ref="upload" />
             </div>
           </div>
           <div class="row justify-content-end">
@@ -49,7 +40,7 @@ export default {
   data() {
     return {
       csv: undefined,
-      disableButton:false,
+      disableButton: false,
     };
   },
   methods: {
@@ -65,9 +56,9 @@ export default {
       const vm = this;
       this.$papa.parse(csv, {
         complete: function (result) {
-          const header = ['title','description','status'];
-          for(let i = 0 ;i < result.data[0].length;i++){
-            if(result.data[0][i] != header[i]){
+          const header = ['title', 'description', 'status'];
+          for (let i = 0; i < result.data[0].length; i++) {
+            if (result.data[0][i] != header[i]) {
               vm.disableButton = true;
               vm.$store.state.noti.hasError = true;
               vm.$store.state.noti.message =
@@ -75,7 +66,7 @@ export default {
               return;
             }
           }
-          result.data.forEach((data) => {  
+          result.data.forEach((data) => {
             if (data.length < 3 || data.length > 3) {
               vm.disableButton = true;
               vm.$store.state.noti.hasError = true;
@@ -91,8 +82,8 @@ export default {
     uploadCsv() {
       this.$store.dispatch("uploadCsv", this.csv);
     },
-    clear(){
-      this.$refs.upload.value = null ;
+    clear() {
+      this.$refs.upload.value = null;
     }
   },
   computed: {

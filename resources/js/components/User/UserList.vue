@@ -64,7 +64,8 @@
           </tbody>
         </table>
       </div>
-      <paginator :page="$store.state.user.currentPage" :lastPage="$store.state.user.lastPage" @paginationFunction="loadNewPage" />
+      <paginator :page="$store.state.user.currentPage" :lastPage="$store.state.user.lastPage"
+        @paginationFunction="loadNewPage" />
     </div>
     <UserModal ref="userModal" :mode="mode" />
   </div>

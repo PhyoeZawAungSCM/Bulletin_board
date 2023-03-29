@@ -1,5 +1,5 @@
 <template>
-  <Post mode="create" :isConfirm="false" />
+  <Post mode="create" :isConfirm="false"/>
 </template>
 
 <script>

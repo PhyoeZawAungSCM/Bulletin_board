@@ -6,7 +6,7 @@ export default {
         posts: [],
         page: 1,
         lastPage: 0,
-        currentPage:1,
+        currentPage: 1,
     },
     mutations: {
         // set the temp post
@@ -68,7 +68,7 @@ export default {
                     state.currentPage = response.data.current_page;
                     state.lastPage = response.data.last_page;
                     commit("GET_POSTS", response.data.data);
-                })
+                });
         },
 
         // create a post
@@ -112,14 +112,17 @@ export default {
         },
 
         // delete a post
-        deletePost({dispatch,state, commit, rootState }, id) {
+        deletePost({ dispatch, state, commit, rootState }, id) {
             http()
                 .delete(`api/posts/${id}`)
                 .then((response) => {
-                    if(state.posts.length == 1){
-                        state.currentPage = state.lastPage-1;
+                    if (state.posts.length == 1) {
+                        state.currentPage = state.lastPage - 1;
                     }
-                    dispatch('getPosts',{search:'',page:state.currentPage});
+                    dispatch("getPosts", {
+                        search: "",
+                        page: state.currentPage,
+                    });
                     //commit("DELETE_POST", response.data.data);
                     rootState.noti.hasMessage = true;
                     rootState.noti.message = "Post delete successfully";
@@ -156,22 +159,21 @@ export default {
                     Authorization: `Bearer ` + rootState.auth.token,
                 },
                 responseType: "blob",
-            })
-                .then((response) => {
-                    var fileURL = window.URL.createObjectURL(
-                        new Blob([response.data])
-                    );
+            }).then((response) => {
+                var fileURL = window.URL.createObjectURL(
+                    new Blob([response.data])
+                );
 
-                    var fileLink = document.createElement("a");
+                var fileLink = document.createElement("a");
 
-                    fileLink.href = fileURL;
+                fileLink.href = fileURL;
 
-                    fileLink.setAttribute("download", "posts.csv");
+                fileLink.setAttribute("download", "posts.csv");
 
-                    document.body.appendChild(fileLink);
+                document.body.appendChild(fileLink);
 
-                    fileLink.click();
-                })
+                fileLink.click();
+            });
         },
     },
     getters: {

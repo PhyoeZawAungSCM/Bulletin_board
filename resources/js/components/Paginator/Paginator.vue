@@ -34,9 +34,9 @@ export default {
       required: false,
       default: 4,
     },
-    page:{
-      type:Number,
-      default:0,
+    page: {
+      type: Number,
+      default: 0,
     }
   },
   data() {

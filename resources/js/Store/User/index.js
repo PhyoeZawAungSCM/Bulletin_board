@@ -9,7 +9,7 @@ export default {
         per_page: 0,
         page: 1,
         lastPage: 0,
-        currentPage:0,
+        currentPage: 0,
         no: [],
     },
     getters: {
@@ -54,7 +54,7 @@ export default {
                     rootState.noti.hasMessage = true;
                     rootState.noti.message = "User create successfully";
                     state.createdTempUser = {};
-                })
+                });
         },
 
         /**
@@ -93,14 +93,20 @@ export default {
          *delete a user
          * @param {int} id
          */
-        deleteUser({ commit,dispatch, rootState ,state}, id) {
+        deleteUser({ commit, dispatch, rootState, state }, id) {
             http()
                 .delete(`api/users/${id}`)
                 .then((response) => {
-                    if(state.users.length == 1){
-                        state.currentPage = state.lastPage-1;
+                    if (state.users.length == 1) {
+                        state.currentPage = state.lastPage - 1;
                     }
-                    dispatch('getUsers', { name:'', email:'', startDate:'', endDate:'', page:state.currentPage });
+                    dispatch("getUsers", {
+                        name: "",
+                        email: "",
+                        startDate: "",
+                        endDate: "",
+                        page: state.currentPage,
+                    });
                     //commit("REMOVE_USER", response.data.data);
                     rootState.noti.hasMessage = true;
                     rootState.noti.message = "User delete successfully";

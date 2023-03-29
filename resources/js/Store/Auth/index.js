@@ -66,7 +66,7 @@ export default {
                 .get("/api/profile")
                 .then((response) => {
                     state.loginUser = response.data;
-                })
+                });
         },
 
         Logout({ state, rootState, dispatch }) {
@@ -101,7 +101,7 @@ export default {
                     rootState.noti.message =
                         "User profile successfully updated";
                     router.push("/posts-list");
-                })
+                });
         },
     },
     getters: {

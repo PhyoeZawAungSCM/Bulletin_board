@@ -25,42 +25,45 @@
     </form>
     <div class="mx-3">
       <div class="table-responsive">
-      <table class="table table-striped align-middle text-center mt-3 text-nowrap">
-        <thead style="background-color: #78b3a4" class="text-white">
-          <tr>
-            <th>Post Title</th>
-            <th >Post Description</th>
-            <th>Posted User</th>
-            <th>Posted Date</th>
-            <th v-if="$store.state.auth.isLogin">Operations</th>
-          </tr>
-        </thead>
-        <tbody class="fw-semibold text-black-50">
-          <tr v-if="getPosts.length == 0">
-            <td colspan="5">No data available in table</td>
-          </tr>
-          <tr v-for="post in getPosts" :key="post.id" style="cursor: pointer">
-            <td @click="openModal(post.id, 'detail')">{{ post.title }}</td>
-            <td @click="openModal(post.id, 'detail')">
-             <div style="width:150px;margin:0 auto;overflow:hidden;align-items: center;justify-content: center;text-overflow: ellipsis;"> {{ post.description }} </div>
-            </td>
-            <td @click="openModal(post.id, 'detail')">{{ post.name }}</td>
-            <td @click="openModal(post.id, 'detail')">
-              {{ changeFormat(post.created_at) }}
-            </td>
-            <td v-if="$store.state.auth.isLogin">
-              <button class="btn btn-primary" @click="editPost(post.id)">
-                Edit
-              </button>
-              <button class="btn btn-danger" @click="openModal(post.id, 'delete')">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-      <paginator :page="$store.state.post.currentPage" :lastPage="$store.state.post.lastPage" @paginationFunction="loadNewPage" />
+        <table class="table table-striped align-middle text-center mt-3 text-nowrap">
+          <thead style="background-color: #78b3a4" class="text-white">
+            <tr>
+              <th>Post Title</th>
+              <th>Post Description</th>
+              <th>Posted User</th>
+              <th>Posted Date</th>
+              <th v-if="$store.state.auth.isLogin">Operations</th>
+            </tr>
+          </thead>
+          <tbody class="fw-semibold text-black-50">
+            <tr v-if="getPosts.length == 0">
+              <td colspan="5">No data available in table</td>
+            </tr>
+            <tr v-for="post in getPosts" :key="post.id" style="cursor: pointer">
+              <td @click="openModal(post.id, 'detail')">{{ post.title }}</td>
+              <td @click="openModal(post.id, 'detail')">
+                <div
+                  style="width:150px;margin:0 auto;overflow:hidden;align-items: center;justify-content: center;text-overflow: ellipsis;">
+                  {{ post.description }} </div>
+              </td>
+              <td @click="openModal(post.id, 'detail')">{{ post.name }}</td>
+              <td @click="openModal(post.id, 'detail')">
+                {{ changeFormat(post.created_at) }}
+              </td>
+              <td v-if="$store.state.auth.isLogin">
+                <button class="btn btn-primary" @click="editPost(post.id)">
+                  Edit
+                </button>
+                <button class="btn btn-danger" @click="openModal(post.id, 'delete')">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <paginator :page="$store.state.post.currentPage" :lastPage="$store.state.post.lastPage"
+        @paginationFunction="loadNewPage" />
     </div>
     <modal ref="postmodal" :mode="mode" />
   </div>
@@ -123,7 +126,7 @@ export default {
 };
 </script>
 <style>
- .description{
-  width:100px !important;
- }
+.description {
+  width: 100px !important;
+}
 </style>

@@ -49,12 +49,6 @@
                 </div>
               </div>
               <!-- Status input -->
-              <!-- <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-                            <label class="form-check-label" for="flexSwitchCheckDisabled">Disabled switch checkbox input</label>
-                        </div>
-                       -->
-
               <div v-if="mode == 'create'" class="row justify-content-end">
                 <div class="col-9" v-if="isConfirm">
                   <button class="btn btn-primary" type="submit">Confirm</button>
@@ -116,6 +110,7 @@ export default {
         description: "",
         status: "",
       },
+      clear: true,
     };
   },
   methods: {
@@ -134,6 +129,7 @@ export default {
           this.createPost();
         }
       }
+      this.clear = false;
     },
     createPost() {
       this.$store.commit("SET_TEMP_POST", this.post);
@@ -160,9 +156,11 @@ export default {
     },
     cancelEditPost() {
       this.$router.push("/edit-post");
+      this.clear = false;
     },
     cancelCreatePost() {
       this.$router.push("/create-post");
+      this.clear = false;
     },
   },
   mounted() {
@@ -174,7 +172,10 @@ export default {
   computed: {
     ...mapGetters(["getHasError", "getMessage"]),
   },
-  destroyed(){
+  destroyed() {
+    if (this.clear) {
+      this.$store.state.post.tempPost = {};
+    }
   }
 };
 </script>
