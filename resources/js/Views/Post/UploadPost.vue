@@ -5,26 +5,17 @@
         <div class="card-header bg-success">
           <h3 class="text-white">Upload CSV file</h3>
         </div>
-        <error-noti v-if="getHasError" :isActive="getHasError">{{
-          getMessage
-        }}</error-noti>
-        <div
-          class="card-body justify-content-center d-block m-auto"
-          style="width: 600px"
-        >
+        <error-noti v-if="getHasError" :isActive="getHasError">
+          {{ getMessage }}
+        </error-noti>
+        <div class="card-body justify-content-center d-block m-auto" style="width: 600px">
           <div class="row mb-3 align-items-center">
             <div class="col-3 text-end">
               <label for="title">CSV file</label>
               <span class="text-danger">*</span>
             </div>
             <div class="col-8">
-              <input
-                class="form-control"
-                type="file"
-                id="csvFile"
-                @change="fileUpload"
-                ref="upload"
-              />
+              <input class="form-control" type="file" id="csvFile" @change="fileUpload" ref="upload" />
             </div>
           </div>
           <div class="row justify-content-end">
@@ -60,7 +51,6 @@ export default {
         this.$store.state.noti.message = "Please upload a csv format";
         return;
       }
-
       const vm = this;
       this.$papa.parse(csv, {
         complete: function (result) {
@@ -82,15 +72,11 @@ export default {
       console.log("upload csv file", this.csv);
       this.$store.dispatch("uploadCsv", this.csv);
     },
-    clear(){
-      this.$refs.upload.value = null ;
+    clear() {
+      this.$refs.upload.value = null;
     }
   },
   computed: {
     ...mapGetters(["getHasError", "getMessage"]),
   },
 };
-</script>
-
-<style>
-</style>

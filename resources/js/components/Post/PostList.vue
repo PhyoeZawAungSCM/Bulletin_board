@@ -7,44 +7,24 @@
     <form @submit.prevent="searchPost">
       <div class="d-flex justify-content-end py-2 align-items-center">
         <label for="keyword" class="me-3 fw-semibold">Search:</label>
-        <input
-          type="text"
-          v-model="searchInput"
-          name="keyword"
-          class="form-control me-3"
-          style="width: 240px"
-          @keydown.enter="onPressEnter(searchPost)"
-        />
+        <input type="text" v-model="searchInput" name="keyword" class="form-control me-3" style="width: 240px"
+          @keydown.enter="onPressEnter(searchPost)" />
         <button class="btn btn-success me-3" style="width: 120px" type="submit">
           Search
         </button>
-        <button
-          class="btn btn-success me-3"
-          style="width: 120px"
-          @click="createPost"
-        >
+        <button class="btn btn-success me-3" style="width: 120px" @click="createPost">
           Create
         </button>
-        <button
-          class="btn btn-success me-3"
-          style="width: 120px"
-          @click="uploadPost"
-        >
+        <button class="btn btn-success me-3" style="width: 120px" @click="uploadPost">
           Upload
         </button>
-        <button
-          class="btn btn-success me-3"
-          style="width: 120px"
-          @click="downloadPost"
-        >
+        <button class="btn btn-success me-3" style="width: 120px" @click="downloadPost">
           Download
         </button>
       </div>
     </form>
     <div class="mx-3">
-      <table
-        class="table table-striped align-middle text-center mt-3"
-      >
+      <table class="table table-striped align-middle text-center mt-3">
         <thead style="background-color: #78b3a4" class="text-white">
           <tr>
             <th>Post Title</th>
@@ -55,7 +35,7 @@
           </tr>
         </thead>
         <tbody class="fw-semibold text-black-50">
-          <tr v-if="getPosts.length == 0" >
+          <tr v-if="getPosts.length == 0">
             <td colspan="5">No data available in table</td>
           </tr>
           <tr v-for="post in getPosts" :key="post.id" style="cursor: pointer">
@@ -71,30 +51,22 @@
               <button class="btn btn-primary" @click="editPost(post.id)">
                 Edit
               </button>
-              <button
-                class="btn btn-danger"
-                @click="openModal(post.id, 'delete')"
-              >
+              <button class="btn btn-danger" @click="openModal(post.id, 'delete')">
                 Delete
               </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <paginator 
-      :firstViewPageNumber="1"
-      :lastPage="$store.state.post.lastPage"
-      @paginationFunction = "loadNewPage"
-      />
+      <paginator :firstViewPageNumber="1" :lastPage="$store.state.post.lastPage" @paginationFunction="loadNewPage" />
     </div>
     <modal ref="postmodal" :mode="mode" />
   </div>
 </template>
-
 <script>
 import Modal from "./PostModal.vue";
 import { mapGetters } from "vuex";
-import {changeDateFormat} from '../../services/ChangeDateFormat';
+import { changeDateFormat } from '../../services/ChangeDateFormat';
 import SuccessNoti from "../../components/Error/SuccessNoti.vue";
 import Paginator from '../Paginator/Paginator.vue';
 
@@ -103,7 +75,6 @@ export default {
     Modal,
     SuccessNoti,
     Paginator,
-
   },
   data() {
     return {
@@ -150,6 +121,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

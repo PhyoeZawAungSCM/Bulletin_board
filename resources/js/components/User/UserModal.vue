@@ -1,34 +1,20 @@
 <template>
   <div>
     <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">
               {{ mode == "delete" ? "Delete Confirm" : "User Detail" }}
             </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="container">
               <div class="row justify-content-between">
                 <div class="col-4">
-                  <img
-                    :src="`${$store.state.baseURL}/${user.profile}`"
-                    style="width: 150px"
-                  />
+                  <img :src="`${$store.state.baseURL}/${user.profile}`" style="width: 150px" />
                 </div>
                 <div class="col-7">
                   <div class="row mb-3">
@@ -45,7 +31,7 @@
                   </div>
                   <div class="row mb-3">
                     <div class="col-5">
-                       Email
+                      Email
                     </div>
                     <div class="col-7">
                       {{ user.email }}
@@ -57,24 +43,24 @@
                       {{ user.phone }}
                     </div>
                   </div>
-                  
-                    <div class="row mb-3">
-                      <div class="col-5">Date of Birth</div>
-                      <div class="col-7">
-                        {{changeDateFormat(user.dob) }}
-                      </div>
+
+                  <div class="row mb-3">
+                    <div class="col-5">Date of Birth</div>
+                    <div class="col-7">
+                      {{ changeDateFormat(user.dob) }}
                     </div>
-                    <div class="row mb-3">
-                      <div class="col-5">Address</div>
-                      <div class="col-7">
-                        {{ user.address }}
-                      </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-5">Address</div>
+                    <div class="col-7">
+                      {{ user.address }}
                     </div>
-                    <div v-if="mode == 'detail'">
+                  </div>
+                  <div v-if="mode == 'detail'">
                     <div class="row mb-3">
                       <div class="col-5">Created Date</div>
                       <div class="col-7">
-                        {{ changeDateFormat( user.created_at )}}
+                        {{ changeDateFormat(user.created_at) }}
                       </div>
                     </div>
                     <div class="row mb-3">
@@ -86,7 +72,7 @@
                     <div class="row mb-3">
                       <div class="col-5">Updated Date</div>
                       <div class="col-7">
-                        {{changeDateFormat(user.updated_at)  }}
+                        {{ changeDateFormat(user.updated_at) }}
                       </div>
                     </div>
                     <div class="row mb-3">
@@ -102,11 +88,7 @@
           </div>
           <div class="modal-footer">
             <div v-if="mode == 'delete'">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                @click="hideModal"
-              >
+              <button type="button" class="btn btn-secondary" @click="hideModal">
                 Close
               </button>
               <button type="button" class="btn btn-danger" @click="doDelete()">
@@ -114,11 +96,7 @@
               </button>
             </div>
             <div v-else>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                @click="hideModal"
-              >
+              <button type="button" class="btn btn-secondary" @click="hideModal">
                 Close
               </button>
             </div>
@@ -129,7 +107,7 @@
   </div>
 </template>
   
-  <script>
+<script>
 import { Modal } from "bootstrap/dist/js/bootstrap.bundle";
 import { http } from "../../services/http_service";
 import { changeDateFormat } from '../../services/ChangeDateFormat';
@@ -159,10 +137,10 @@ export default {
     },
     doDelete() {
       console.log("delete");
-      this.$store.dispatch('deleteUser',this.user.id);
+      this.$store.dispatch('deleteUser', this.user.id);
       this.hideModal();
     },
-    changeDateFormat(date){
+    changeDateFormat(date) {
       return changeDateFormat(date);
     }
   },
@@ -170,10 +148,9 @@ export default {
     this.modal = new Modal("#exampleModal", {});
   },
 };
-</script>
-  
+</script>  
 <style>
-.col-7{
+.col-7 {
   word-wrap: break-word;
 }
 </style>

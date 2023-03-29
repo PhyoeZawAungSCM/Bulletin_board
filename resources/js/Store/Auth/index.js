@@ -35,30 +35,26 @@ export default {
          *
          */
         Login({ state, commit, dispatch, rootState }, user) {
-                    http()
-                        .post("/api/login", user)
-                        .then((response) => {
-                            console.log(response.data);
-                            state.token = response.data.token;
-                            dispatch("getUserProfile");
-                            state.isLogin = true;
-                            if (user.rememberMe) {
-                                let token = cryptoJs.AES.encrypt(response.data.token,'bulletinboard').toString();
-                                localStorage.setItem(
-                                    "token",
-                                     token
-                                );
-                            }
-                            rootState.noti.hasMessage = true;
-                            rootState.noti.message = "Login Success";
-                            router.push("/posts-list");
-                        })
-                        .catch((error) => {
-                            rootState.noti.hasError = true;
-                            rootState.noti.message =
-                                error.response.data.message;
-                        });
-
+            http()
+                .post("/api/login", user)
+                .then((response) => {
+                    console.log(response.data);
+                    state.token = response.data.token;
+                    dispatch("getUserProfile");
+                    state.isLogin = true;
+                    let token = cryptoJs.AES.encrypt(
+                        response.data.token,
+                        "bulletinboard"
+                    ).toString();
+                    localStorage.setItem("token", token);
+                    rootState.noti.hasMessage = true;
+                    rootState.noti.message = "Login Success";
+                    router.push("/posts-list");
+                })
+                .catch((error) => {
+                    rootState.noti.hasError = true;
+                    rootState.noti.message = error.response.data.message;
+                });
         },
 
         //

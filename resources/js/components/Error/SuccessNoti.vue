@@ -2,17 +2,12 @@
   <div v-show="isActive">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <slot></slot>
-      <button
-        type="button"
-        class="btn-close"
-        aria-label="Close"
-        @click="close"
-      ></button>
+      <button type="button" class="btn-close" aria-label="Close" @click="close"></button>
     </div>
   </div>
 </template>
   
-  <script>
+<script>
 export default {
   props: {
     isActive: Boolean,
@@ -32,6 +27,3 @@ export default {
   },
 };
 </script>
-  
-  <style>
-</style>

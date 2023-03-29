@@ -6,28 +6,17 @@
           <h3 class="text-white">Change Password</h3>
         </div>
         <error-noti :isActive="getHasError" v-if="getHasError">{{ getMessage }}</error-noti>
-        <div
-          class="card-body justify-content-center d-block m-auto"
-          style="width: 700px"
-        >
+        <div class="card-body justify-content-center d-block m-auto" style="width: 700px">
           <ValidationObserver v-slot="{ handleSubmit }">
-            <form @submit.prevent="handleSubmit(changePassword())">
+            <form @submit.prevent="handleSubmit(changePassword)">
               <div class="row mb-3">
                 <div class="col-4 text-end">
                   <label for="password">Current Password</label>
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider
-                    rules="required|min:6|max:20"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="password"
-                      v-model="password"
-                    />
+                  <ValidationProvider name="Current password" rules="required|min:6|max:20" v-slot="{ errors }">
+                    <input type="password" class="form-control" id="password" v-model="password" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -38,17 +27,9 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider
-                    rules="required|min:6|max:20"
-                    v-slot="{ errors }"
-                    vid="newPassword"
-                  >
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="newPassword"
-                      v-model="newPassword"
-                    />
+                  <ValidationProvider name="New password" rules="required|min:6|max:20" v-slot="{ errors }"
+                    vid="newPassword">
+                    <input type="password" class="form-control" id="newPassword" v-model="newPassword" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -59,16 +40,9 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider
-                    rules="required|min:6|max:20|confirm:newPassword"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="newPasswordConfirm"
-                      v-model="newConfirmPassword"
-                    />
+                  <ValidationProvider name="New confirm password" rules="required|min:6|max:20|confirm:newPassword"
+                    v-slot="{ errors }">
+                    <input type="password" class="form-control" id="newPasswordConfirm" v-model="newConfirmPassword" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -122,16 +96,12 @@ export default {
         })
         .catch((error) => {
           this.$store.state.noti.hasError = true;
-          this.$store.state.noti.message= error.response.data.error;
+          this.$store.state.noti.message = error.response.data.error;
         });
     },
-    
   },
-  computed:{
-    ...mapGetters(['getHasError','getMessage'])
+  computed: {
+    ...mapGetters(['getHasError', 'getMessage'])
   }
 };
 </script>
-
-<style>
-</style>

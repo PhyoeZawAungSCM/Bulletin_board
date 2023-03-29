@@ -11,10 +11,7 @@
         <success-noti v-if="getHasMessage" :isActive="getHasMessage">{{
           getMessage
         }}</success-noti>
-        <div
-          class="card-body justify-content-center d-block m-auto"
-          style="width: 700px"
-        >
+        <div class="card-body justify-content-center d-block m-auto" style="width: 700px">
           <ValidationObserver v-slot="{ handleSubmit }">
             <form @submit.prevent="handleSubmit(Login)">
               <div class="row mb-3">
@@ -23,17 +20,8 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider
-                    name="email"
-                    rules="required|max:50|email"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="email"
-                      v-model="user.email"
-                    />
+                  <ValidationProvider name="Email" rules="required|max:50|email" v-slot="{ errors }">
+                    <input type="email" class="form-control" id="email" v-model="user.email" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -45,17 +33,8 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider
-                    name="password"
-                    rules="required|min:6|max:20"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="password"
-                      v-model="user.password"
-                    />
+                  <ValidationProvider name="Password" rules="required|min:6|max:20" v-slot="{ errors }">
+                    <input type="password" class="form-control" id="password" v-model="user.password" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -66,21 +45,15 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="flexCheckChecked"
-                          v-model="user.rememberMe"
-                        />
+                        <input class="form-check-input" type="checkbox" id="flexCheckChecked"
+                          v-model="user.remember_me" />
                         <label class="form-check-label" for="flexCheckChecked">
                           Remember me
                         </label>
                       </div>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                      <router-link to="/forgotten-password"
-                        >Forgotten Password?</router-link
-                      >
+                      <router-link to="/forgotten-password">Forgotten Password?</router-link>
                     </div>
                   </div>
                 </div>
@@ -101,11 +74,6 @@
             </form>
           </ValidationObserver>
           <!-- end of form -->
-          <div class="row justify-content-end">
-            <div class="col-8">
-              <a>Create Account? <i class="fa-solid fa-user-plus"></i></a>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -125,7 +93,7 @@ export default {
       user: {
         email: "",
         password: "",
-        rememberMe: false,
+        remember_me: false,
       },
     };
   },

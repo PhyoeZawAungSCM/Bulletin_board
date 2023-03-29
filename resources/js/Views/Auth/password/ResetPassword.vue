@@ -5,26 +5,15 @@
         <div class="card-header bg-success">
           <h3 class="text-white">Reset Password</h3>
         </div>
-        <div
-          class="card-body justify-content-center d-block m-auto"
-          style="width: 700px"
-          v-if="checking"
-        >
+        <div class="card-body justify-content-center d-block m-auto" style="width: 700px" v-if="checking">
           checking
         </div>
-        <div
-          class="card-body justify-content-center d-block m-auto"
-          style="width: 700px"
-          v-if="!checking && !isValidToken"
-        >
+        <div class="card-body justify-content-center d-block m-auto" style="width: 700px"
+          v-if="!checking && !isValidToken">
           The link inactive ,
           <router-link to="/forgotten-password"> request new link ? </router-link>
         </div>
-        <div
-          class="card-body justify-content-center d-block m-auto"
-          style="width: 700px"
-          v-if="isValidToken"
-        >
+        <div class="card-body justify-content-center d-block m-auto" style="width: 700px" v-if="isValidToken">
           <ValidationObserver v-slot="{ handleSubmit }">
             <form @submit.prevent="handleSubmit(resetPassword)">
               <div class="row mb-3">
@@ -33,17 +22,8 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider
-                    v-slot="{ errors }"
-                    vid="password"
-                    rules="required|min:6|max:20"
-                  >
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="password"
-                      v-model="password"
-                    />
+                  <ValidationProvider v-slot="{ errors }" vid="password" rules="required|min:6|max:20">
+                    <input type="password" class="form-control" id="password" v-model="password" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -55,16 +35,8 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider
-                    v-slot="{ errors }"
-                    rules="required|min:6|max:20|confirm:password"
-                  >
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="passwordConfirm"
-                      v-model="passwordConfirm"
-                    />
+                  <ValidationProvider v-slot="{ errors }" rules="required|min:6|max:20|confirm:password">
+                    <input type="password" class="form-control" id="passwordConfirm" v-model="passwordConfirm" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -72,10 +44,7 @@
 
               <div class="row justify-content-end">
                 <div class="col-8">
-                  <button
-                    class="btn btn-primary"
-                    type="submit"
-                  >
+                  <button class="btn btn-primary" type="submit">
                     Update Password
                   </button>
                 </div>
@@ -92,8 +61,8 @@
 import Axios from "axios";
 import { http } from "../../../services/http_service";
 export default {
-  props:{
-    token:String,
+  props: {
+    token: String,
   },
   data() {
     return {
@@ -125,13 +94,12 @@ export default {
               console.log(error);
             });
         })
-        .catch( error => {
-           this.checking = false;
+        .catch(error => {
+          this.checking = false;
         })
     },
   },
   mounted() {
-
     http()
       .post("api/check-token", { token: this.token })
       .then((Response) => {
@@ -146,6 +114,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

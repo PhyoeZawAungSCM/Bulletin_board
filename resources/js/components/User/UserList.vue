@@ -3,51 +3,24 @@
     <div class="d-block bg-success py-2 align-items-center">
       <h4 class="text-white ps-3">User list</h4>
     </div>
-    <success-noti v-if="getHasMessage" :isActive="getHasMessage">{{getMessage}}</success-noti>
-     <error-noti v-if="getHasError" :isActive="getHasError">{{getMessage}}</error-noti>
+    <success-noti v-if="getHasMessage" :isActive="getHasMessage">{{ getMessage }}</success-noti>
+    <error-noti v-if="getHasError" :isActive="getHasError">{{ getMessage }}</error-noti>
     <div class="d-flex justify-content-end py-2 align-items-center ms-3">
       <label for="keyword" class="me-3 fw-semibold">Name:</label>
-      <input
-        v-model="name"
-        type="text"
-        name="keyword"
-        class="form-control me-3"
-      />
+      <input v-model="name" type="text" name="keyword" class="form-control me-3" />
       <label for="keyword" class="me-3 fw-semibold">Email:</label>
-      <input
-        v-model="email"
-        type="text"
-        name="keyword"
-        class="form-control me-3"
-      />
+      <input v-model="email" type="text" name="keyword" class="form-control me-3" />
       <label for="keyword" class="me-3 fw-semibold">From:</label>
-      <input
-        v-model="startDate"
-        type="date"
-        name="keyword"
-        class="form-control me-3"
-      />
+      <input v-model="startDate" type="date" name="keyword" class="form-control me-3" />
       <label for="keyword" class="me-3 fw-semibold">To:</label>
-      <input
-        v-model="endDate"
-        type="date"
-        name="keyword"
-        class="form-control me-3"
-      />
-      <button
-        class="btn btn-success me-3"
-        style="width: 120px"
-        @click="searchUser"
-      >
+      <input v-model="endDate" type="date" name="keyword" class="form-control me-3" />
+      <button class="btn btn-success me-3" style="width: 120px" @click="searchUser">
         Search
       </button>
     </div>
     <div class="mx-3">
       <div class="table-responsive">
-        <table
-          class="table table-striped align-middle text-center mt-3  text-nowrap"
-    
-        >
+        <table class="table table-striped align-middle text-center mt-3  text-nowrap">
           <thead style="background-color: #78b3a4" class="text-white">
             <tr>
               <th>No</th>
@@ -66,11 +39,7 @@
             <tr v-if="getAllUsers.length == 0">
               <td colspan="10">No data available in table</td>
             </tr>
-            <tr
-              style="cursor: pointer"
-              v-for="user in getAllUsers"
-              :key="user.id"
-            >
+            <tr style="cursor: pointer" v-for="user in getAllUsers" :key="user.id">
               <td @click="openModal(user.id, 0)">{{ user.no }}</td>
               <td @click="openModal(user.id, 0)">{{ user.name }}</td>
               <td @click="openModal(user.id, 0)">{{ user.email }}</td>
@@ -95,11 +64,7 @@
           </tbody>
         </table>
       </div>
-      <paginator 
-      :firstViewPageNumber="1"
-      :lastPage="$store.state.user.lastPage"
-      @paginationFunction = "loadNewPage"
-      />
+      <paginator :firstViewPageNumber="1" :lastPage="$store.state.user.lastPage" @paginationFunction="loadNewPage" />
     </div>
     <UserModal ref="userModal" :mode="mode" />
   </div>
@@ -172,11 +137,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getAllUsers",'getHasMessage','getMessage','getHasError']),
+    ...mapGetters(["getAllUsers", 'getHasMessage', 'getMessage', 'getHasError']),
   },
 };
 </script>
-
 <style>
 .table-wrapper {
   overflow: auto;

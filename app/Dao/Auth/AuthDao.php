@@ -25,7 +25,7 @@ class AuthDao implements AuthDaoInterface
 	 */
 	public function login($validated)
 	{
-		return Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']]);
+		return Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']],$validated['remember_me']);
 	}
 
 	/**

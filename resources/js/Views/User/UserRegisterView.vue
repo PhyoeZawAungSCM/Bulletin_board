@@ -1,16 +1,12 @@
 <template>
- <UserRegister/>
+  <UserRegister />
 </template>
 
 <script>
 import UserRegister from '../../components/User/UserRegister.vue';
 export default {
-    components:{
-        UserRegister,
-    }
+  components: {
+    UserRegister,
+  }
 }
 </script>
-
-<style>
-
-</style>

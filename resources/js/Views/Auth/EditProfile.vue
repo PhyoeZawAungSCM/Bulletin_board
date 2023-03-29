@@ -5,25 +5,17 @@
         <div class="card-header bg-success">
           <h3 class="text-white">Profile Edit</h3>
         </div>
-        <div
-          class="card-body justify-content-center d-block m-auto"
-          style="width: 600px"
-        >
-          <ValidationObserver v-slot="{ handleSubmit }">
-            <form @submit.prevent="handleSubmit(Update)">
+        <div class="card-body justify-content-center d-block m-auto" style="width: 600px">
+          <ValidationObserver ref="form">
+            <form @submit.prevent="Update">
               <div class="row mb-3 align-items-center">
                 <div class="col-4 text-end">
                   <label for="name">Name</label>
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider rules="required" v-slot="{ errors }">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="name"
-                      v-model="user.name"
-                    />
+                  <ValidationProvider name="Name" rules="required" v-slot="{ errors }">
+                    <input type="text" class="form-control" id="name" v-model="user.name" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -31,20 +23,12 @@
               <!-- Name input -->
               <div class="row mb-3 align-items-center">
                 <div class="col-4 text-end">
-                  <label for="email">E-Mail Address</label>
+                  <label for="email">E-mail Address</label>
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider
-                    rules="required|email|max:50"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="email"
-                      v-model="user.email"
-                    />
+                  <ValidationProvider name="Email" rules="required|email|max:50" v-slot="{ errors }">
+                    <input type="email" class="form-control" id="email" v-model="user.email" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -55,18 +39,9 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider rules="required" v-slot="{ errors }">
-                    <select
-                      class="form-select"
-                      aria-label="Default select example"
-                      id="type"
-                      v-model="user.type"
-                    >
-                      <option
-                        v-if="$store.state.auth.loginUser.type == '0'"
-                        value="0"
-                        selected
-                      >
+                  <ValidationProvider name="Type" rules="required" v-slot="{ errors }">
+                    <select class="form-select" aria-label="Default select example" id="type" v-model="user.type">
+                      <option v-if="$store.state.auth.loginUser.type == '0'" value="0" selected>
                         Admin
                       </option>
                       <option value="1">User</option>
@@ -81,12 +56,7 @@
                   <label for="phone">Phone</label>
                 </div>
                 <div class="col-8">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="phone"
-                    v-model="user.phone"
-                  />
+                  <input type="text" class="form-control" id="phone" v-model="user.phone" />
                 </div>
               </div>
               <!-- phone input -->
@@ -95,12 +65,7 @@
                   <label for="dob">Date of birth</label>
                 </div>
                 <div class="col-8">
-                  <input
-                    type="date"
-                    class="form-control"
-                    id="dob"
-                    v-model="user.dob"
-                  />
+                  <input type="date" class="form-control" id="dob" v-model="user.dob" />
                 </div>
               </div>
               <!-- date of birth input -->
@@ -110,32 +75,20 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider rules="required" v-slot="{ errors }">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="address"
-                      v-model="user.address"
-                    />
+                  <ValidationProvider name="Address" rules="required" v-slot="{ errors }">
+                    <input type="text" class="form-control" id="address" v-model="user.address" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
               </div>
               <!-- Address input -->
-              <div
-                class="row mb-3 align-items-center"
-                v-if="!previewImage && user.profile != ''"
-              >
+              <div class="row mb-3 align-items-center" v-if="!previewImage && user.profile != ''">
                 <div class="col-4 text-end">
                   <label for="profile">Old Profile</label>
                 </div>
                 <div class="col-8">
                   <div class="mb-3">
-                    <img
-                      :src="`${$store.state.baseURL}/${user.profile}`"
-                      alt="..."
-                      style="width: 100px"
-                    />
+                    <img :src="`${$store.state.baseURL}/${user.profile}`" alt="..." style="width: 100px" />
                   </div>
                 </div>
               </div>
@@ -158,18 +111,8 @@
                 </div>
                 <div class="col-8">
                   <div class="mb-3">
-                    <ValidationProvider
-                      rules="image|size:2048"
-                      ref="provider"
-                      v-slot="{ errors }"
-                    >
-                      <input
-                        class="form-control"
-                        type="file"
-                        id="profile"
-                        @change="uploadData"
-                        ref="profile"
-                      />
+                    <ValidationProvider name="Profile" rules="image|size:2048" ref="provider" v-slot="{ errors }">
+                      <input class="form-control" type="file" id="profile" @change="uploadData" ref="profile" />
                       <span class="invalid-feedback">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
@@ -180,12 +123,10 @@
               <div class="row justify-content-end">
                 <div class="col-8">
                   <button class="btn btn-primary" type="submit">edit</button>
-                  <button class="btn btn-secondary" @click="clear">
+                  <button class="btn btn-secondary" type="button" @click="clear">
                     Clear
                   </button>
-                  <router-link to="/change-password" class="ms-3"
-                    >Change passord</router-link
-                  >
+                  <router-link to="/change-password" class="ms-3">Change passord</router-link>
                 </div>
               </div>
             </form>
@@ -218,7 +159,9 @@ export default {
   },
   methods: {
     Update() {
-      this.$store.dispatch("updateProfile", this.user);
+      this.$refs.form.handleSubmit(() => {
+        this.$store.dispatch("updateProfile", this.user);
+      });
     },
     async uploadData(e) {
       const { valid } = await this.$refs.provider.validate(e);
@@ -241,6 +184,7 @@ export default {
       };
       this.$refs.profile.value = null;
       this.previewImage = null;
+      this.$refs.form.reset();
     },
   },
   props: {
@@ -248,15 +192,6 @@ export default {
   },
   mounted() {
     this.user = this.$store.state.auth.loginUser;
-    //  this.user = this.$store.state.user.createdTempUser;
-    //  if(this.isConfirm){
-    //     disableFormInputs();
-    //     this.previewImage = URL.createObjectURL(this.user.profile);
-    //     console.log("Confirm mode");
-    //  }
   },
 };
 </script>
-
-<style>
-</style>

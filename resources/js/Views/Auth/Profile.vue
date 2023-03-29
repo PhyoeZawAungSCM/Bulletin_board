@@ -5,18 +5,12 @@
         <div class="card-header bg-success">
           <h3 class="text-white">Profile</h3>
         </div>
-        <div
-          class="card-body justify-content-center d-block m-auto mt-3"
-          style="width: 100%"
-        >
+        <div class="card-body justify-content-center d-block m-auto mt-3" style="width: 100%">
           <div class="container">
             <div class="row">
               <div class="col-4">
-                <img
-                  :src="`${$store.state.baseURL}/${$store.state.auth.loginUser.profile}`"
-                  class="d-block"
-                  style="width: 200px"
-                />
+                <img :src="`${$store.state.baseURL}/${$store.state.auth.loginUser.profile}`" class="d-block"
+                  style="width: 200px" />
               </div>
               <div class="col-8">
                 <div class="row mb-3">
@@ -47,20 +41,17 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-4">Date of birth</div>
-                  <div class="col-5">{{changeDateFormat($store.state.auth.loginUser.dob)}}</div>
+                  <div class="col-5">{{ changeDateFormat($store.state.auth.loginUser.dob) }}</div>
                 </div>
                 <div class="row mb-3">
-                  <div class="col-4">address</div>
+                  <div class="col-4">Address</div>
                   <div class="col-5">
                     {{ $store.state.auth.loginUser.address }}
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col-8">
-                    <button
-                      class="btn btn-primary"
-                      @click="$router.push('/edit-profile')"
-                    >
+                    <button class="btn btn-primary" @click="$router.push('/edit-profile')">
                       Edit Profile
                     </button>
                   </div>
@@ -78,13 +69,10 @@
 import { changeDateFormat } from '../../services/ChangeDateFormat';
 
 export default {
-  methods:{
-    changeDateFormat(date){
+  methods: {
+    changeDateFormat(date) {
       return changeDateFormat(date);
     }
   }
 };
 </script>
-
-<style>
-</style>

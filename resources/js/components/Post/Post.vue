@@ -8,10 +8,7 @@
         <error-noti v-if="getHasError" :isActive="getHasError">{{
           getMessage
         }}</error-noti>
-        <div
-          class="card-body justify-content-center d-block m-auto"
-          style="width: 600px"
-        >
+        <div class="card-body justify-content-center d-block m-auto" style="width: 600px">
           <ValidationObserver v-slot="{ handleSubmit }">
             <form @submit.prevent="handleSubmit(Summitter)">
               <div class="row mb-3">
@@ -20,16 +17,8 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider
-                    rules="required|max:255"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="Title"
-                      v-model="post.title"
-                    />
+                  <ValidationProvider rules="required|max:255" v-slot="{ errors }">
+                    <input type="text" class="form-control" id="Title" v-model="post.title" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -42,12 +31,7 @@
                 </div>
                 <div class="col-8">
                   <ValidationProvider rules="required" v-slot="{ errors }">
-                    <textarea
-                      class="form-control"
-                      id="Description"
-                      rows="3"
-                      v-model="post.description"
-                    ></textarea>
+                    <textarea class="form-control" id="Description" rows="3" v-model="post.description"></textarea>
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -59,13 +43,8 @@
                 </div>
                 <div class="col-8">
                   <div class="form-check form-switch">
-                    <input
-                      v-model="post.status"
-                      class="form-check-input"
-                      type="checkbox"
-                      role="switch"
-                      id="flexSwitchCheckChecked"
-                    />
+                    <input v-model="post.status" class="form-check-input" type="checkbox" role="switch"
+                      id="flexSwitchCheckChecked" />
                   </div>
                 </div>
               </div>
@@ -201,9 +180,5 @@ export default {
   computed: {
     ...mapGetters(["getHasError", "getMessage"]),
   },
-
 };
 </script>
-
-<style>
-</style>

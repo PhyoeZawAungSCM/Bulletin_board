@@ -36,3 +36,4 @@ const app = new Vue({
 });
 
 export default app;
+

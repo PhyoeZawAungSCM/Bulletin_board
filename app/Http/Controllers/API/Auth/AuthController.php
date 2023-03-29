@@ -32,8 +32,9 @@ class AuthController extends Controller
 	public function login(Request $request)
 	{
 		$validated = $request->validate([
-			'email'    => 'required|email|max:50',
-			'password' => 'required|min:6|max:20'
+			'email'      => 'required|email|max:50',
+			'password'   => 'required|min:6|max:20',
+			'remember_me'=> 'boolean',
 		]);
 		return $this->auth->login($validated);
 	}
