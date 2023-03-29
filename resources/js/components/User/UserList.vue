@@ -74,10 +74,10 @@
 import UserModal from "./UserModal.vue";
 import { mapGetters } from "vuex";
 import { changeDateFormat } from "../../services/ChangeDateFormat";
-import SuccessNoti from '../Error/SuccessNoti.vue';
+import SuccessNoti from "../Error/SuccessNoti.vue";
 
-import ErrorNoti from '../Error/ErrorNoti.vue';
-import Paginator from '../Paginator/Paginator.vue';
+import ErrorNoti from "../Error/ErrorNoti.vue";
+import Paginator from "../Paginator/Paginator.vue";
 export default {
   components: {
     UserModal,
@@ -99,7 +99,6 @@ export default {
     openModal(id, mode) {
       //0 for mode of detail
       //1 for mode of delete
-      console.log(mode);
       switch (mode) {
         case 0:
           this.mode = "detail";

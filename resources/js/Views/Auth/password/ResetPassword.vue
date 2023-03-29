@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import Axios from "axios";
 import { http } from "../../../services/http_service";
 export default {
   props: {
@@ -87,12 +86,7 @@ export default {
               this.$store.state.noti.hasMessage = true;
               this.$store.state.noti.message = "Password reset success please login"
               this.$router.push('/login');
-
-              console.log(response);
             })
-            .catch((error) => {
-              console.log(error);
-            });
         })
         .catch(error => {
           this.checking = false;
@@ -105,11 +99,9 @@ export default {
       .then((Response) => {
         this.checking = false;
         this.isValidToken = true;
-        console.log(Response.data);
       })
       .catch((error) => {
         this.checking = false;
-        console.log();
       });
   },
 };

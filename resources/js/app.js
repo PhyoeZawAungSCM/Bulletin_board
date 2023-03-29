@@ -1,18 +1,18 @@
 
-import './bootstrap';
+import "./bootstrap";
 import "bootstrap/dist/css/bootstrap.css"
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "bootstrap-vue/dist/bootstrap-vue.css"
 window.Vue = require('vue').default;
 Vue.use(BootstrapVue)
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import App from './App.vue';
-import VueRouter from 'vue-router';
-import router from './router';
-import {ValidationProvider,ValidationObserver} from 'vee-validate';
-import './services/validation';
-import  store from './Store';
-import VuePapaParse from 'vue-papa-parse';
-import VueProgressBar from 'vue-progressbar'
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue"
+import App from "./App.vue";
+import VueRouter from "vue-router";
+import router from "./router";
+import {ValidationProvider,ValidationObserver} from "vee-validate";
+import "./services/validation";
+import  store from "./Store";
+import VuePapaParse from "vue-papa-parse";
+import VueProgressBar from "vue-progressbar"
 const options = {
   transition: {
     speed: '0.2s',

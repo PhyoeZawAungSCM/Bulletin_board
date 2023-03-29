@@ -207,7 +207,6 @@ export default {
   },
   methods: {
     Register() {
-      console.log("Register");
       this.$store.commit("SET_CREATED_TEMP_USER", this.user);
       this.$router.push("/register-confirm");
     },
@@ -218,7 +217,6 @@ export default {
       const { valid } = await this.$refs.provider.validate(e);
       if (valid) {
         this.user.profile = this.$refs.profile.files.item(0);
-        console.log("Image is ready to upload to backend");
       }
     },
     clear() {
@@ -247,7 +245,6 @@ export default {
     if (this.isConfirm) {
       disableFormInputs();
       this.previewImage = URL.createObjectURL(this.user.profile);
-      console.log("Confirm mode");
     }
   },
 };

@@ -66,9 +66,9 @@
 <script>
 import Modal from "./PostModal.vue";
 import { mapGetters } from "vuex";
-import { changeDateFormat } from '../../services/ChangeDateFormat';
+import { changeDateFormat } from "../../services/ChangeDateFormat";
 import SuccessNoti from "../../components/Error/SuccessNoti.vue";
-import Paginator from '../Paginator/Paginator.vue';
+import Paginator from "../Paginator/Paginator.vue";
 
 export default {
   components: {
@@ -86,7 +86,6 @@ export default {
   methods: {
     openModal(id, mode) {
       this.mode = mode;
-      console.log("openModal");
       this.$refs.postmodal.showModal(id);
     },
     createPost() {

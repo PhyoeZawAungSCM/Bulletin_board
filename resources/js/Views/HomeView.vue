@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Header from '../components/Common/Header.vue';
-import Footer from '../components/Common/Footer.vue';
-import { isLogin } from '../services/Auth_service';
+import Header from "../components/Common/Header.vue";
+import Footer from "../components/Common/Footer.vue";
+import { isLogin } from "../services/Auth_service";
 export default {
   components: {
     Header,
@@ -20,7 +20,6 @@ export default {
     if (isLogin()) {
       this.$store.dispatch('getUsers', { name: '', email: '', startDate: '', endDate: '', page: 1 });
     }
-
   }
 }
 </script>

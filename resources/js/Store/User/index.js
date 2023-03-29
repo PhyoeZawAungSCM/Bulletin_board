@@ -25,7 +25,6 @@ export default {
             router.push("/users-list");
         },
         REMOVE_USER(state, user) {
-            console.log(user);
             state.users = state.users.filter((data) => data.id != user.id);
         },
     },
@@ -55,9 +54,6 @@ export default {
                     rootState.noti.message = "User create successfully";
                     state.createdTempUser = {};
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
         },
 
         /**
@@ -85,7 +81,6 @@ export default {
                         users.forEach((user, index) => {
                             user.no = no[index];
                         });
-                        console.log(users);
                         state.lastPage = response.data.last_page;
                         state.users = users;
                     });

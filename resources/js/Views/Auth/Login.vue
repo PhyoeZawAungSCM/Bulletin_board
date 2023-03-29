@@ -100,7 +100,6 @@ export default {
   methods: {
     Login() {
       // Here to make login function to login user
-      console.log("Login");
       this.$store.dispatch("Login", this.user);
     },
   },

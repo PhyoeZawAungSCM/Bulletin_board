@@ -16,7 +16,6 @@ import UploadPost from "../Views/Post/UploadPost.vue";
 import EditProfile from "../Views/Auth/EditProfile.vue";
 import ChangePassword from "../Views/Auth/password/ChangePassword.vue";
 import PageNotFound from "../Views/PageNotFound.vue";
-import store from "../Store";
 import { isLogin } from "../services/Auth_service";
 const router = new VueRouter({
     mode: "history",

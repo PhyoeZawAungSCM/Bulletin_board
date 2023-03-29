@@ -92,9 +92,9 @@
 </template>
 
 <script>
-import { Modal } from 'bootstrap/dist/js/bootstrap.bundle';
-import { http } from '../../services/http_service';
-import { changeDateFormat } from '../../services/ChangeDateFormat';
+import { Modal } from "bootstrap/dist/js/bootstrap.bundle";
+import { http } from "../../services/http_service";
+import { changeDateFormat } from "../../services/ChangeDateFormat";
 export default {
   props: {
     mode: String,
@@ -107,7 +107,6 @@ export default {
   },
   methods: {
     showModal(id) {
-      console.log("showModal");
       http().get(`api/posts/${id}`)
         .then(response => {
           this.post = response.data;
@@ -118,7 +117,6 @@ export default {
       this.modal.hide();
     },
     doDelete() {
-      console.log("delete");
       this.$store.dispatch('deletePost', this.post.id)
       this.hideModal();
     },

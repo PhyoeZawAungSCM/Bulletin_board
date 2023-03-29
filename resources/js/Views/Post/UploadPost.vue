@@ -54,11 +54,8 @@ export default {
       const vm = this;
       this.$papa.parse(csv, {
         complete: function (result) {
-          console.log("parsing complete read", result.data);
           result.data.forEach((data) => {
-            console.log(data.length);
             if (data.length < 3) {
-              console.log("Less than");
               vm.$store.state.noti.hasError = true;
               vm.$store.state.noti.message =
                 "All post data must have 3 columns";
@@ -69,7 +66,6 @@ export default {
       });
     },
     uploadCsv() {
-      console.log("upload csv file", this.csv);
       this.$store.dispatch("uploadCsv", this.csv);
     },
     clear() {

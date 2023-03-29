@@ -31,10 +31,7 @@ export default {
 
         // edit a post
         EIDT_POST(state, post) {
-            console.log(post);
             let index = state.posts.findIndex((data) => data.id == post.id);
-            console.log(index);
-            console.log(state.posts[index]);
             state.posts[index].title = post.title;
             state.posts[index].description = post.description;
             state.posts[index].status = post.status ? 1 : 0;
@@ -43,8 +40,6 @@ export default {
         // delete a post
         DELETE_POST(state, post) {
             state.posts = state.posts.filter((data) => {
-                console.log("this is data", data.id);
-                console.log("this is post", post.id);
                 return data.id !== post.id;
             });
         },
@@ -66,15 +61,12 @@ export default {
 
         // getting all the post from api
         getPosts({ state, commit }, payload) {
-            console.log(payload);
-
             http()
                 .get(`/api/posts?search=${payload.search}&page=${payload.page}`)
                 .then((response) => {
                     state.lastPage = response.data.last_page;
                     commit("GET_POSTS", response.data.data);
                 })
-                .catch((error) => console.log("error:", error));
         },
 
         // create a post
@@ -97,15 +89,12 @@ export default {
                     router.push("/create-post");
                     rootState.noti.hasError = true;
                     rootState.noti.message = error.response.data.message;
-
-                    console.log(error.response);
                 });
         },
 
         // edit a post
         editPost({ state, commit, rootState }) {
             let status = state.tempPost.status ? 1 : 0;
-            console.log("this is status", status);
             http()
                 .put(`/api/posts/${state.tempPost.id}`, {
                     title: state.tempPost.title,
@@ -121,24 +110,23 @@ export default {
         },
 
         // delete a post
-        deletePost({ commit, rootState }, id) {
+        deletePost({dispatch, commit, rootState }, id) {
             http()
                 .delete(`api/posts/${id}`)
                 .then((response) => {
-                    commit("DELETE_POST", response.data.data);
+                    dispatch('getPosts',{search:'',page:1});
+                    //commit("DELETE_POST", response.data.data);
                     rootState.noti.hasMessage = true;
                     rootState.noti.message = "Post delete successfully";
                 });
         },
         // uploading csv to the api
         uploadCsv({ commit, rootState }, csv) {
-            console.log("Upload csv action");
             let formData = new FormData();
             formData.append("csv", csv);
             httpFile()
                 .post("api/upload-csv", formData)
                 .then((response) => {
-                    console.log(response.data.data);
                     response.data.data.forEach((data) => {
                         commit("ADD_POST", data);
                     });
@@ -149,7 +137,6 @@ export default {
                 .catch((error) => {
                     rootState.noti.hasError = true;
                     rootState.noti.message = error.response.data.message;
-                    console.log(error.response.data);
                 });
         },
         downloadPost({ rootState }) {
@@ -166,7 +153,6 @@ export default {
                 responseType: "blob",
             })
                 .then((response) => {
-                    console.log(response);
                     var fileURL = window.URL.createObjectURL(
                         new Blob([response.data])
                     );
@@ -181,9 +167,6 @@ export default {
 
                     fileLink.click();
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
         },
     },
     getters: {

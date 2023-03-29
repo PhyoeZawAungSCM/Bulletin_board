@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Axios from 'axios';
+import Axios from "axios";
 import { mapGetters } from "vuex";
 import ErrorNoti from "../../../components/Error/ErrorNoti.vue";
 import SuccessNoti from "../../../components/Error/SuccessNoti.vue";
@@ -67,7 +67,6 @@ export default {
           this.sending = false
           this.$store.state.noti.message = error.response.data.message;
           this.$store.state.noti.hasError = true;
-          console.log(error.response.data.message);
         })
     },
   },

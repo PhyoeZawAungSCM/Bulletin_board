@@ -120,12 +120,10 @@ export default {
   },
   methods: {
     Summitter() {
-      console.log("Hello i am summitter");
       if (this.mode == "edit") {
         if (this.isConfirm) {
           this.editPostConfirm();
         } else {
-          console.log("Edit Post function call");
           this.editPost();
         }
       }
@@ -138,21 +136,17 @@ export default {
       }
     },
     createPost() {
-      console.log("createPost");
       this.$store.commit("SET_TEMP_POST", this.post);
       this.$router.push("/create-post-confirm");
     },
     createPostConfirm() {
-      console.log("confirm post");
       this.$store.dispatch("createPost");
     },
     editPost() {
-      console.log("edit post");
       this.$store.commit("SET_TEMP_POST", this.post);
       this.$router.push("/edit-post-confirm");
     },
     editPostConfirm() {
-      console.log("edit post confirm");
       this.$store.dispatch("editPost");
       this.$store.dispatch("clearPostData");
       this.$router.push("/posts-list");
@@ -180,5 +174,10 @@ export default {
   computed: {
     ...mapGetters(["getHasError", "getMessage"]),
   },
+  destroyed(){
+    if(this.mode == 'edit'){
+      this.$store.state.post.tempPost = {};
+    } 
+  }
 };
 </script>

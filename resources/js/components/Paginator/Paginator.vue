@@ -69,23 +69,5 @@ export default {
     // enable this if you want to load your first page from paginator
     //this.$emit("paginationFunction", this.page);
   },
-  // enable this if you want to load your first page from paginator
-  // watch: {
-  //     page(newPage, oldPage) {
-  //         console.log("this is the page number:", newPage);
-  //         console.log("this is the last page:", this.lastPage);
-  //         if (newPage == 1) {
-  //             this.$refs.previousButton.disabled = true;
-  //         } else {
-  //             this.$refs.previousButton.disabled = false;
-  //         }
-  //         if (newPage == this.lastPage) {
-  //             console.log("reach last page");
-  //             this.$refs.nextButton.disabled = true;
-  //         } else {
-  //             this.$refs.nextButton.disabled = false;
-  //         }
-  //     },
-  // },
 };
 </script>

@@ -141,7 +141,6 @@
 </template>
 
 <script>
-import { disableFormInputs } from "../../services/DisableInput";
 export default {
   data() {
     return {
@@ -169,7 +168,6 @@ export default {
         let file = this.$refs.profile.files.item(0);
         this.user.profile = file;
         this.previewImage = URL.createObjectURL(file);
-        console.log("Image is ready to upload to backend");
       }
     },
     clear() {

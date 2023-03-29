@@ -38,7 +38,6 @@ export default {
             http()
                 .post("/api/login", user)
                 .then((response) => {
-                    console.log(response.data);
                     state.token = response.data.token;
                     dispatch("getUserProfile");
                     state.isLogin = true;
@@ -68,7 +67,6 @@ export default {
                 .then((response) => {
                     state.loginUser = response.data;
                 })
-                .catch((error) => console.log(error));
         },
 
         Logout({ state, rootState, dispatch }) {
@@ -86,7 +84,6 @@ export default {
                 });
         },
         updateProfile({ commit, state, rootState }, user) {
-            console.log(user.name);
             let formData = new FormData();
             formData.append("name", user.name);
             formData.append("email", user.email);
@@ -99,16 +96,12 @@ export default {
             httpFile()
                 .post(`api/update/${state.loginUser.id}`, formData)
                 .then((response) => {
-                    console.log(response);
                     commit("EDIT_PROFILE", response.data.data);
                     rootState.noti.hasMessage = true;
                     rootState.noti.message =
                         "User profile successfully updated";
                     router.push("/posts-list");
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
         },
     },
     getters: {

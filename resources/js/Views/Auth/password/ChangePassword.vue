@@ -81,7 +81,6 @@ export default {
   },
   methods: {
     changePassword() {
-      console.log("change password");
       http()
         .post("api/change-password", {
           password: this.password,
@@ -92,7 +91,6 @@ export default {
           this.$router.push("/posts-list");
           this.$store.state.noti.hasMessage = true;
           this.$store.state.noti.message = response.data.message;
-          console.log(response);
         })
         .catch((error) => {
           this.$store.state.noti.hasError = true;
