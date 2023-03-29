@@ -34,10 +34,13 @@ export default {
       required: false,
       default: 4,
     },
+    page:{
+      type:Number,
+      default:0,
+    }
   },
   data() {
     return {
-      page: 0,
       currentButtonNumber: 0,
       nextButtonNumber: 1,
     };

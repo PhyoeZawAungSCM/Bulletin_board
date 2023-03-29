@@ -60,7 +60,7 @@
         </tbody>
       </table>
     </div>
-      <paginator :firstViewPageNumber="1" :lastPage="$store.state.post.lastPage" @paginationFunction="loadNewPage" />
+      <paginator :page="$store.state.post.currentPage" :lastPage="$store.state.post.lastPage" @paginationFunction="loadNewPage" />
     </div>
     <modal ref="postmodal" :mode="mode" />
   </div>

@@ -6,6 +6,7 @@ export default {
         posts: [],
         page: 1,
         lastPage: 0,
+        currentPage:1,
     },
     mutations: {
         // set the temp post
@@ -64,6 +65,7 @@ export default {
             http()
                 .get(`/api/posts?search=${payload.search}&page=${payload.page}`)
                 .then((response) => {
+                    state.currentPage = response.data.current_page;
                     state.lastPage = response.data.last_page;
                     commit("GET_POSTS", response.data.data);
                 })
@@ -110,11 +112,14 @@ export default {
         },
 
         // delete a post
-        deletePost({dispatch, commit, rootState }, id) {
+        deletePost({dispatch,state, commit, rootState }, id) {
             http()
                 .delete(`api/posts/${id}`)
                 .then((response) => {
-                    dispatch('getPosts',{search:'',page:1});
+                    if(state.posts.length == 1){
+                        state.currentPage = state.lastPage-1;
+                    }
+                    dispatch('getPosts',{search:'',page:state.currentPage});
                     //commit("DELETE_POST", response.data.data);
                     rootState.noti.hasMessage = true;
                     rootState.noti.message = "Post delete successfully";
