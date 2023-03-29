@@ -79,6 +79,14 @@ class PostService implements PostServiceInterface
 				return response()->json([
 					'message' => 'Post already exist'
 				], 422);
+			} elseif ($errorCode == 1406) {
+				return response()->json([
+					'message' => 'Description too long'
+				], 422);
+			} else {
+				return response()->json([
+					'message' => 'Some error occur'
+				], 422);
 			}
 		} catch (Throwable $th) {
 			return response()->json([

@@ -130,3 +130,8 @@ export default {
   }
 }
 </script>
+<style>
+.col-9 {
+  word-wrap: break-word;
+}
+</style>
