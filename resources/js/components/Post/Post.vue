@@ -175,9 +175,6 @@ export default {
     ...mapGetters(["getHasError", "getMessage"]),
   },
   destroyed(){
-    if(this.mode == 'edit'){
-      this.$store.state.post.tempPost = {};
-    } 
   }
 };
 </script>
