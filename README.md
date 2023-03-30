@@ -44,6 +44,18 @@ npm install
 ```bash
 php artisan db:seed --class=Admin
 ```
+## Mail setup
+```php
+// .env file
+MAIL_MAILER=smtp
+MAIL_HOST=send.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=//your username
+MAIL_PASSWORD=// your password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=from@example.com
+MAIL_FROM_NAME=//your app name
+```
 ## Running the project
 ```bash
 npm run dev
