@@ -22,7 +22,7 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider v-slot="{ errors }" vid="password" rules="required|min:6|max:20">
+                  <ValidationProvider v-slot="{ errors }" vid="password" rules="required|min:6|max:20" name="Password">
                     <input type="password" class="form-control" id="password" v-model="password" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
@@ -35,7 +35,7 @@
                   <span class="text-danger">*</span>
                 </div>
                 <div class="col-8">
-                  <ValidationProvider v-slot="{ errors }" rules="required|min:6|max:20|confirm:password">
+                  <ValidationProvider v-slot="{ errors }" rules="required|min:6|max:20|confirm:password" name="Password confirm">
                     <input type="password" class="form-control" id="passwordConfirm" v-model="passwordConfirm" />
                     <span class="invalid-feedback">{{ errors[0] }}</span>
                   </ValidationProvider>
