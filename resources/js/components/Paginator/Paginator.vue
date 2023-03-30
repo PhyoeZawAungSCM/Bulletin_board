@@ -36,14 +36,14 @@ export default {
     },
     pageData: {
       type: Number,
-      default: 0,
+      default: 1,
     }
   },
   data() {
     return {
       currentButtonNumber: 0,
       nextButtonNumber: 1,
-      page:0,
+      page: 1,
     };
   },
   name: "Paginator",
@@ -68,15 +68,10 @@ export default {
       this.$emit("paginationFunction", this.page);
     },
   },
-  computed:{
-    changePage(){
-      this.page = this.pageData;
-    }  
-  },
-  mounted() {
-     this.page = this.firstViewPageNumber;
-  //   // enable this if you want to load your first page from paginator
-  //   //this.$emit("paginationFunction", this.page);
-   },
+  watch:{
+    pageData:function(newData){
+      this.page = newData;
+    }
+  }
 };
 </script>
