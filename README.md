@@ -5,7 +5,7 @@ It includes basic CRUD, laravel sanctum authentication, and Excel Upload/Downloa
 
 ## Description
 * #### php version 7.4.33
-* #### laravel version 0
+* #### laravel version 8
 * #### vue js version 2
 ## Installation
 
@@ -15,6 +15,9 @@ git clone https://github.com/PhyoeZawAungSCM/Bulletin_board.git
 
 ```bash
 cd Bulletin_board
+```
+```bash
+composer install
 ```
 ```bash
 copy .env.example .env
