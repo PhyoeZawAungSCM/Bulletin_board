@@ -44,7 +44,7 @@ npm install
 ```bash
 php artisan db:seed --class=Admin
 ```
-## Mail setup
+## Mailtrap setup
 ```php
 // .env file
 MAIL_MAILER=smtp
@@ -54,7 +54,19 @@ MAIL_USERNAME=//your username
 MAIL_PASSWORD=// your password
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=from@example.com
-MAIL_FROM_NAME=//your app name
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+## Gmail setup
+```php
+ MAIL_MAILER=smtp
+ MAIL_HOST=smtp.gmail.com
+ MAIL_PORT=465
+ MAIL_USERNAME=//your gmail
+ MAIL_PASSWORD=// your password
+ MAIL_ENCRYPTION=ssl
+ MAIL_FROM_ADDRESS= //your gmail
+ MAIL_FROM_NAME="${APP_NAME}"
 ```
 ## Running the project
 ```bash
