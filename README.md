@@ -44,3 +44,14 @@ php artisan db:seed --class=Admin
 ```bash
 php artisan storage:link
 ```
+## Running the project
+```bash
+npm run dev
+```
+or 
+```bash
+npm run watch
+```
+
+```
+php artisan serve
