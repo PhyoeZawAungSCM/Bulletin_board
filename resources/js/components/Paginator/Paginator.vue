@@ -34,7 +34,7 @@ export default {
       required: false,
       default: 4,
     },
-    page: {
+    pageData: {
       type: Number,
       default: 0,
     }
@@ -43,6 +43,7 @@ export default {
     return {
       currentButtonNumber: 0,
       nextButtonNumber: 1,
+      page:0,
     };
   },
   name: "Paginator",
@@ -67,10 +68,15 @@ export default {
       this.$emit("paginationFunction", this.page);
     },
   },
-  mounted() {
-    this.page = this.firstViewPageNumber;
-    // enable this if you want to load your first page from paginator
-    //this.$emit("paginationFunction", this.page);
+  computed:{
+    changePage(){
+      this.page = this.pageData;
+    }  
   },
+  mounted() {
+     this.page = this.firstViewPageNumber;
+  //   // enable this if you want to load your first page from paginator
+  //   //this.$emit("paginationFunction", this.page);
+   },
 };
 </script>

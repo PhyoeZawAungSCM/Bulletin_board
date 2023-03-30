@@ -6,11 +6,8 @@
           <h3 class="text-white">Register</h3>
         </div>
         <div class="card-body justify-content-center d-block m-auto" style="width: 600px">
-          <ValidationObserver v-slot="{ handleSubmit }" ref="form">
-            <form @submit.prevent="
-              isConfirm
-                ? handleSubmit(Confirm)
-                : handleSubmit(Register)">
+          <ValidationObserver ref="form">
+            <form @submit.prevent="isConfirm ? Confirm() : Register() ">
               <div class="row mb-3 align-items-center">
                 <div class="col-4 text-end">
                   <label for="name">Name</label>
@@ -207,11 +204,15 @@ export default {
   },
   methods: {
     Register() {
-      this.$store.commit("SET_CREATED_TEMP_USER", this.user);
-      this.$router.push("/register-confirm");
+      this.$refs.form.handleSubmit(()=>{
+              this.$store.commit("SET_CREATED_TEMP_USER", this.user);
+              this.$router.push("/register-confirm");
+      });
     },
     Confirm() {
-      this.$store.dispatch("registerUser");
+      this.$refs.form.handleSubmit(()=>{
+        this.$store.dispatch("registerUser");
+      }) 
     },
     async uploadData(e) {
       const { valid } = await this.$refs.provider.validate(e);
@@ -232,6 +233,7 @@ export default {
         profile: "",
       };
       this.$refs.profile.value = null;
+      this.$refs.form.reset();
     },
     cancel() {
       this.$router.push("/register");

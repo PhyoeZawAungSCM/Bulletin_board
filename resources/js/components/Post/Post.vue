@@ -69,14 +69,14 @@
               <div v-if="mode == 'edit'" class="row justify-content-end">
                 <div class="col-9" v-if="isConfirm">
                   <button class="btn btn-primary" type="submit">Confirm</button>
-                  <button class="btn btn-secondary" @click="cancelEditPost">
+                  <button class="btn btn-secondary" type="button" @click="cancelEditPost">
                     Cancel
                   </button>
                 </div>
                 <!-- confirm post -->
                 <div class="col-9" v-else>
                   <button class="btn btn-primary" type="submit">Edit</button>
-                  <button class="btn btn-secondary" @click="clear">
+                  <button class="btn btn-secondary" type='button' @click="clearPostData">
                     Clear
                   </button>
                 </div>
@@ -147,7 +147,7 @@ export default {
       this.$store.dispatch("clearPostData");
       this.$router.push("/posts-list");
     },
-    clear() {
+    clearPostData() {
       this.post = {
         title: "",
         description: "",
