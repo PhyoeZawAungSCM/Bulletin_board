@@ -60,3 +60,17 @@ php artisan serve
 ```bash
 php artisan storage:link
 ```
+
+### To send the post mail list through artisan command
+```bash
+php artisan mail:send example@gmail.com 
+```
+
+```bash
+php artisan mail:send example1@gmail.com example2@gmail.com example3@gmail.com
+```
+
+* #### if the mail sending error occur run
+```bash
+php artisan storage:link
+```
