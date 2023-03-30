@@ -222,6 +222,11 @@ class PostService implements PostServiceInterface
 		$user = Auth::user();
 		// getting all of the posts list
 		$posts = $this->postDao->downloadCsv();
+		// check the directory exists or not
+		if (!Storage::exists('DownloadCsv')) {
+			// make the directory
+			Storage::makeDirectory('DownloadCsv');
+		}
 		// get the path of file DownloadCsv
 		$storedpath = Storage::path('DownloadCsv');
 		// create file name with user name and unique id

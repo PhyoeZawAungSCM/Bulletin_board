@@ -56,7 +56,12 @@
                   <label for="phone">Phone</label>
                 </div>
                 <div class="col-8">
-                  <input type="text" class="form-control" id="phone" v-model="user.phone" />
+                  <ValidationProvider  v-slot="{ errors }" rules="phone|min:8|max:11" name="Phone">
+                    <input type="text" class="form-control" id="phone" v-model="user.phone" />
+                      <span class="invalid-feedback">{{
+                      errors[0]
+                      }}</span>
+                  </ValidationProvider>
                 </div>
               </div>
               <!-- phone input -->
@@ -189,7 +194,16 @@ export default {
     isConfirm: Boolean,
   },
   mounted() {
-    this.user = this.$store.state.auth.loginUser;
+    let  user = this.$store.state.auth.loginUser;
+    let keys = Object.keys(user);
+    keys.forEach(key => {
+      if(user[key] != null){
+        this.user[key] = user[key]
+      }
+      else{
+        this.user[key] = '';
+      } 
+    });
   },
 };
 </script>
